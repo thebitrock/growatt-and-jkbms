@@ -1,7 +1,7 @@
 esphome:
   name: growatt
   comment: "Growatt SPF 6000 ES Plus ←RS485→ Atom Lite + ATOMIC RS485 Base"
-  min_version: 2025.8.4
+  min_version: 2025.9.1
   name_add_mac_suffix: false
 
 esp32:
