@@ -1,0 +1,817 @@
+esphome:
+  name: growatt
+  comment: "Growatt SPF 6000 ES Plus ←RS485→ Atom Lite + ATOMIC RS485 Base"
+  min_version: 2025.8.4
+  name_add_mac_suffix: false
+
+esp32:
+  board: m5stack-atom # Atom Lite
+  framework:
+    type: esp-idf
+
+logger:
+  level: DEBUG
+
+api:
+  encryption:
+    key: !secret growatt.api.encryption.key
+
+ota:
+  - platform: esphome
+    password: !secret growatt.ota.password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+uart:
+  - id: rs485_uart
+    baud_rate: 9600 # Growatt 9600 8N1
+    rx_buffer_size: 384
+    tx_pin: GPIO19 # ATOMIC RS485 Base: TX=19
+    rx_pin: GPIO22 # ATOMIC RS485 Base: RX=22
+
+modbus:
+  - id: rs485
+    uart_id: rs485_uart
+
+mqtt:
+  broker: !secret mqtt_host
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  id: mqtt_client
+
+modbus_controller:
+  - id: growatt
+    address: 1 # Slave 1
+    modbus_id: rs485
+    update_interval: 7s
+    command_throttle: 300ms
+
+sensor:
+  # System status code: addr 0
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "System status code"
+    address: 0
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 0
+
+  # PV1 voltage: addr 1
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "PV1 voltage"
+    address: 1
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # PV2 voltage: addr 2
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "PV2 voltage"
+    address: 2
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # PV1 power: addr 3(HI), 4(LO) (need test)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: pv1_power_w
+    name: "PV1 power"
+    address: 3
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "W"
+    device_class: power
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # PV2 power: addr 5(HI), 6(LO) (need test)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: pv2_power_w
+    name: "PV2 power"
+    address: 5
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "W"
+    device_class: power
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # PV1 buck current Buck1Curr: addr 7
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "PV1 buck current"
+    address: 7
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "A"
+    device_class: current
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # PV2 buck current Buck2Curr: addr 8
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "PV2 buck current"
+    address: 8
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "A"
+    device_class: current
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # AC output power: addr 9(HI), 10(LO)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: ac_out_power_w
+    name: "AC output power"
+    address: 9
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "W"
+    device_class: power
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # +AC output VA: addr 11(HI), 12(LO)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: ac_out_va
+    name: "AC output VA"
+    address: 11
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "VA"
+    device_class: power
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # AC charge power: addr 13(HI), 14(LO) - (need test)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: ac_charge_power_w
+    name: "AC charge power"
+    address: 13
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "W"
+    device_class: power
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # - platform: modbus_controller
+  #   modbus_controller_id: growatt
+  #   name: "AC frequency"
+  #   address: 14
+  #   register_type: read
+  #   value_type: U_WORD
+  #   unit_of_measurement: "Hz"
+  #   device_class: frequency
+  #   state_class: measurement
+  #   accuracy_decimals: 2
+  #   filters:
+  #     - multiply: 0.01
+
+  # AC charge VA 15-16
+  # - name: ac_charge_va_VA
+  #   address: 15
+  #   table: input
+  #   type: uint32
+
+  # DcDc Temp
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Battery voltage"
+    address: 17
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Battery SOC"
+    address: 18
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "%"
+    device_class: battery
+    state_class: measurement
+    accuracy_decimals: 0
+
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "DC bus voltage"
+    address: 19
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "AC input voltage"
+    address: 20
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "AC input frequency"
+    address: 21
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "Hz"
+    device_class: frequency
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "AC output voltage"
+    address: 22
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "AC output frequency"
+    address: 23
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "Hz"
+    device_class: frequency
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+
+  # Output DC voltage 24
+  # InvTemp 25
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Inverter Temperature"
+    address: 25
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "DC-DC temperature"
+    address: 26
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # Load percent 27
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Load percent"
+    address: 27
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "%"
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # Battery-port volt (DSP) 28
+  # Bat_Volt_DSP 29
+  # Time total H30-L31
+
+  # Buck1_NTC 32
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "MPPT1 temperature"
+    address: 32
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # Buck2_NTC 33
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "MPPT2 temperature"
+    address: 33
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # OP_Curr 34
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "AC output current"
+    address: 34
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "A"
+    device_class: current
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # Inv_Curr 35
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Battery to Inverter"
+    address: 35
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "A"
+    device_class: current
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # AC_InWatt: addr 36(HI), 37(LO) (need test)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: ac_in_watt
+    name: "AC input power"
+    address: 36
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "W"
+    device_class: power
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.1
+
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Battery type code"
+    address: 39
+    register_type: holding
+    value_type: U_WORD
+    accuracy_decimals: 0
+
+  # AC_InVA: addr 38(HI), 39(LO) (need test)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: ac_in_va
+    name: "AC input apparent power"
+    address: 38
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "VA"
+    device_class: power
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.1
+
+  # Fault Bits 40
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Fault bits"
+    address: 40
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 0
+
+  # Warn Bits 41
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Warning bits"
+    address: 41
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 0
+
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Fault code"
+    address: 42
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 0
+
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Warning code"
+    address: 43
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 0
+
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "DSP firmware"
+    address: 44
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 0
+
+  # +Epv1_today: addr 48(HI), 49(LO) - today energy from pv1+pv2 (not pv1 only)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: pv_energy_today_kwh
+    name: "PV energy today"
+    address: 48
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.1
+
+  # +Epv1_total: addr 50(HI), 51(LO) - total energy from pv1+pv2 (not pv1 only)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: pv_energy_total_kwh
+    name: "PV energy total"
+    address: 50
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: total_increasing
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.1
+
+  # Epv2_today: addr 52(HI), 53(LO) - (not works for spf6000ESplus)
+  # - platform: modbus_controller
+  #   modbus_controller_id: growatt
+  #   id: pv2_energy_today_kwh
+  #   name: "PV2 energy today"
+  #   address: 52
+  #   register_type: read
+  #   value_type: U_DWORD
+  #   unit_of_measurement: "kWh"
+  #   device_class: energy
+  #   state_class: total_increasing
+  #   accuracy_decimals: 2
+  #   filters:
+  #     - multiply: 0.01
+  # Epv2_total: addr 54(HI), 55(LO) - (not works for spf6000ESplus)
+  # Eac_charge_today: addr 56(HI), 57(LO)
+
+  # +Eac_charge_total: addr 58(HI), 59(LO)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: ac_charge_energy_total_kwh
+    name: "AC charge energy total"
+    address: 58
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: total_increasing
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.1
+
+  # +Ebat_discharge_today: addr 60(HI), 61(LO)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: batt_discharge_energy_today_kwh
+    name: "Battery discharge energy today"
+    address: 60
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.1
+
+  # +Ebat_discharge_total: addr 62(HI), 63(LO)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: batt_discharge_energy_total_kwh
+    name: "Battery discharge energy total"
+    address: 62
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: total_increasing
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.1
+
+  # +Eac_discharge_today: addr 64(HI), 65(LO)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: ac_discharge_energy_today_kwh
+    name: "AC discharge energy today"
+    address: 64
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.1
+
+  # +Eac_discharge_total: addr 66(HI), 67(LO)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: ac_discharge_energy_total_kwh
+    name: "AC discharge energy total"
+    address: 66
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: total_increasing
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.1
+
+  # ACChrCurr: addr 68 - AC Charging Battery Current (need test)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: ac_charging_battery_current_a
+    name: "AC Charging Battery Current"
+    address: 68
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "A"
+    device_class: current
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # AC_DischrWatt: addr 69(HI), 70(LO) - (for on-grid model?)
+  # AC_DischrVA: addr 71(HI), 72(LO) - (for on-grid model?)
+  # +Bat_DischrWatt: addr 73(HI), 74(LO) - not needed use batt_power_W at addr 77
+  # - platform: modbus_controller
+  #   modbus_controller_id: growatt
+  #   id: batt_discharging_power_w
+  #   name: "Battery discharging power"
+  #   address: 73
+  #   register_type: read
+  #   value_type: S_DWORD
+  #   unit_of_measurement: "W"
+  #   device_class: power
+  #   state_class: measurement
+  #   accuracy_decimals: 1
+  #   filters:
+  #     - multiply: 0.1
+
+  # +Bat_DischrVA: addr 75(HI), 76(LO)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: batt_discharging_va
+    name: "Battery discharging apparent power"
+    address: 75
+    register_type: read
+    value_type: S_DWORD
+    unit_of_measurement: "VA"
+    device_class: power
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # +Battery power: addr 77(HI), 78(LO)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Battery power"
+    id: batt_power_w
+    address: 77
+    register_type: read
+    value_type: S_DWORD
+    unit_of_measurement: "W"
+    device_class: power
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # 79 uwSlaveExistCnt
+  # 80 BatOverCharge
+
+  # +MpptFanSpeed: addr 81
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "MPPT fan speed"
+    address: 81
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "%"
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 1
+
+  # +InvFanSpeed: addr 82
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Fan speed"
+    address: 82
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "%"
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 1
+
+  # +TotalChgCurr: addr 83
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Total charge current"
+    address: 83
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "A"
+    device_class: current
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # +TotalDisChgCurr: addr 84
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Total discharge current"
+    address: 84
+    register_type: read
+    value_type: U_WORD
+    unit_of_measurement: "A"
+    device_class: current
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  # Eop_dischrToday: addr 85(HI), 86(LO) - (need test)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Discharge energy today"
+    address: 85
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.1
+
+  # Eop_dischrTotal: addr 87(HI), 88(LO) - (need test)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    name: "Discharge energy total"
+    address: 87
+    register_type: read
+    value_type: U_DWORD
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: measurement
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.1
+
+  # ParaChgCurr: addr 89 - Total paralleling charge current
+  # ParaChgCurr: addr 90 (duplicate?)
+
+  # ParaDischgCurr: addr 91 - Total paralleling discharge current
+
+  # Battery Current: addr 92 - BMS reading battery current (always 429.4 - what is it?)
+  # - platform: modbus_controller
+  #   modbus_controller_id: growatt
+  #   name: "Battery current"
+  #   address: 92
+  #   register_type: read
+  #   value_type: S_WORD
+  #   unit_of_measurement: "A"
+  #   device_class: current
+  #   state_class: measurement
+  #   accuracy_decimals: 1
+  #   filters:
+  #     - multiply: 0.1
+
+  # Battery State of Charge, %: addr 93 (always 0 - what is it? duplicate addr 18?)
+  # - platform: modbus_controller
+  #   modbus_controller_id: growatt
+  #   name: "Battery SOC (BMS)"
+  #   address: 93
+  #   register_type: read
+  #   value_type: U_WORD
+  #   unit_of_measurement: "%"
+  #   device_class: battery
+  #   state_class: measurement
+  #   accuracy_decimals: 0
+
+  # Battery Remaining Capacity, Ah: addr 94 (always 0 - what is it?)
+  # - platform: modbus_controller
+  #   modbus_controller_id: growatt
+  #   name: "Battery remaining capacity"
+  #   address: 94
+  #   register_type: read
+  #   value_type: U_WORD
+  #   unit_of_measurement: "Ah"
+  #   device_class: battery
+  #   state_class: measurement
+  #   accuracy_decimals: 2
+
+  # +Nominal/Full Charge Capacity: addr 95 (batt 1 only)
+  # - platform: modbus_controller
+  #   modbus_controller_id: growatt
+  #   name: "Battery nominal capacity"
+  #   address: 95
+  #   register_type: read
+  #   value_type: U_WORD
+  #   unit_of_measurement: "Ah"
+  #   device_class: battery
+  #   state_class: measurement
+  #   accuracy_decimals: 2
+
+  # +Battery Cycle Count: addr 96 (batt 1 only)
+  # - platform: modbus_controller
+  #   modbus_controller_id: growatt
+  #   name: "Battery cycle count"
+  #   address: 96
+  #   register_type: read
+  #   value_type: U_WORD
+  #   state_class: measurement
+  #   accuracy_decimals: 2
+  #   filters:
+  #     - multiply: 1
+  #     - lambda: return x * 0.01;   # 1921 * 0.01 = 19.21
