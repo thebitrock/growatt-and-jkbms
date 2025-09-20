@@ -14,11 +14,11 @@ logger:
 
 api:
   encryption:
-    key: !secret growatt.api.encryption.key
+    key: !secret growatt_api_encryption_key
 
 ota:
   - platform: esphome
-    password: !secret growatt.ota.password
+    password: !secret growatt_ota_password
 
 wifi:
   ssid: !secret wifi_ssid
