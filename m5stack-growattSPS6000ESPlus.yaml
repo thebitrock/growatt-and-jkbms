@@ -10,7 +10,7 @@ esp32:
     type: esp-idf
 
 logger:
-  level: DEBUG
+  level: INFO
 
 api:
   encryption:
@@ -52,15 +52,18 @@ sensor:
   # System status code: addr 0
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: system_status_code
     name: "System status code"
     address: 0
     register_type: read
     value_type: U_WORD
+    state_class: measurement
     accuracy_decimals: 0
 
   # PV1 voltage: addr 1
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: pv1_voltage
     name: "PV1 voltage"
     address: 1
     register_type: read
@@ -75,6 +78,7 @@ sensor:
   # PV2 voltage: addr 2
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: pv2_voltage
     name: "PV2 voltage"
     address: 2
     register_type: read
@@ -89,7 +93,7 @@ sensor:
   # PV1 power: addr 3(HI), 4(LO) (need test)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: pv1_power_w
+    id: pv1_power
     name: "PV1 power"
     address: 3
     register_type: read
@@ -104,7 +108,7 @@ sensor:
   # PV2 power: addr 5(HI), 6(LO) (need test)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: pv2_power_w
+    id: pv2_power
     name: "PV2 power"
     address: 5
     register_type: read
@@ -119,6 +123,7 @@ sensor:
   # PV1 buck current Buck1Curr: addr 7
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: pv1_buck_current_a
     name: "PV1 buck current"
     address: 7
     register_type: read
@@ -133,6 +138,7 @@ sensor:
   # PV2 buck current Buck2Curr: addr 8
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: pv2_buck_current
     name: "PV2 buck current"
     address: 8
     register_type: read
@@ -147,7 +153,7 @@ sensor:
   # AC output power: addr 9(HI), 10(LO)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: ac_out_power_w
+    id: ac_output_power
     name: "AC output power"
     address: 9
     register_type: read
@@ -162,8 +168,8 @@ sensor:
   # +AC output VA: addr 11(HI), 12(LO)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: ac_out_va
-    name: "AC output VA"
+    id: ac_output_apparent_power
+    name: "AC output apparent power"
     address: 11
     register_type: read
     value_type: U_DWORD
@@ -177,7 +183,7 @@ sensor:
   # AC charge power: addr 13(HI), 14(LO) - (need test)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: ac_charge_power_w
+    id: ac_charge_power
     name: "AC charge power"
     address: 13
     register_type: read
@@ -212,6 +218,7 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: growatt
     name: "Battery voltage"
+    id: battery_voltage
     address: 17
     register_type: read
     value_type: U_WORD
@@ -224,6 +231,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: battery_soc
     name: "Battery SOC"
     address: 18
     register_type: read
@@ -235,6 +243,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: dc_bus_voltage
     name: "DC bus voltage"
     address: 19
     register_type: read
@@ -248,6 +257,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: ac_input_voltage
     name: "AC input voltage"
     address: 20
     register_type: read
@@ -261,6 +271,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: ac_input_frequency
     name: "AC input frequency"
     address: 21
     register_type: read
@@ -274,6 +285,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: ac_output_voltage
     name: "AC output voltage"
     address: 22
     register_type: read
@@ -287,6 +299,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: ac_output_frequency
     name: "AC output frequency"
     address: 23
     register_type: read
@@ -302,6 +315,7 @@ sensor:
   # InvTemp 25
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: inverter_temperature
     name: "Inverter Temperature"
     address: 25
     register_type: read
@@ -315,6 +329,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: dc_dc_temperature
     name: "DC-DC temperature"
     address: 26
     register_type: read
@@ -329,6 +344,7 @@ sensor:
   # Load percent 27
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: load_percent
     name: "Load percent"
     address: 27
     register_type: read
@@ -346,6 +362,7 @@ sensor:
   # Buck1_NTC 32
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: mppt1_temperature
     name: "MPPT1 temperature"
     address: 32
     register_type: read
@@ -360,6 +377,7 @@ sensor:
   # Buck2_NTC 33
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: mppt2_temperature
     name: "MPPT2 temperature"
     address: 33
     register_type: read
@@ -374,6 +392,7 @@ sensor:
   # OP_Curr 34
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: ac_output_current
     name: "AC output current"
     address: 34
     register_type: read
@@ -388,7 +407,8 @@ sensor:
   # Inv_Curr 35
   - platform: modbus_controller
     modbus_controller_id: growatt
-    name: "Battery to Inverter"
+    id: battery_to_inverter_current
+    name: "Battery to inverter current"
     address: 35
     register_type: read
     value_type: U_WORD
@@ -402,7 +422,7 @@ sensor:
   # AC_InWatt: addr 36(HI), 37(LO) (need test)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: ac_in_watt
+    id: ac_input_power
     name: "AC input power"
     address: 36
     register_type: read
@@ -416,6 +436,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: battery_type_code
     name: "Battery type code"
     address: 39
     register_type: holding
@@ -425,7 +446,7 @@ sensor:
   # AC_InVA: addr 38(HI), 39(LO) (need test)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: ac_in_va
+    id: ac_input_apparent_power
     name: "AC input apparent power"
     address: 38
     register_type: read
@@ -440,6 +461,7 @@ sensor:
   # Fault Bits 40
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: fault_bits
     name: "Fault bits"
     address: 40
     register_type: read
@@ -449,6 +471,7 @@ sensor:
   # Warn Bits 41
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: warning_bits
     name: "Warning bits"
     address: 41
     register_type: read
@@ -457,6 +480,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: fault_code
     name: "Fault code"
     address: 42
     register_type: read
@@ -465,6 +489,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: warning_code
     name: "Warning code"
     address: 43
     register_type: read
@@ -473,6 +498,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: dsp_firmware
     name: "DSP firmware"
     address: 44
     register_type: read
@@ -482,7 +508,7 @@ sensor:
   # +Epv1_today: addr 48(HI), 49(LO) - today energy from pv1+pv2 (not pv1 only)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: pv_energy_today_kwh
+    id: pv_energy_today
     name: "PV energy today"
     address: 48
     register_type: read
@@ -497,7 +523,7 @@ sensor:
   # +Epv1_total: addr 50(HI), 51(LO) - total energy from pv1+pv2 (not pv1 only)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: pv_energy_total_kwh
+    id: pv_energy_total
     name: "PV energy total"
     address: 50
     register_type: read
@@ -529,7 +555,7 @@ sensor:
   # +Eac_charge_total: addr 58(HI), 59(LO)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: ac_charge_energy_total_kwh
+    id: ac_charge_energy_total
     name: "AC charge energy total"
     address: 58
     register_type: read
@@ -544,7 +570,7 @@ sensor:
   # +Ebat_discharge_today: addr 60(HI), 61(LO)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: batt_discharge_energy_today_kwh
+    id: battery_discharge_energy_today
     name: "Battery discharge energy today"
     address: 60
     register_type: read
@@ -559,7 +585,7 @@ sensor:
   # +Ebat_discharge_total: addr 62(HI), 63(LO)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: batt_discharge_energy_total_kwh
+    id: battery_discharge_energy_total
     name: "Battery discharge energy total"
     address: 62
     register_type: read
@@ -574,7 +600,7 @@ sensor:
   # +Eac_discharge_today: addr 64(HI), 65(LO)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: ac_discharge_energy_today_kwh
+    id: ac_discharge_energy_today
     name: "AC discharge energy today"
     address: 64
     register_type: read
@@ -589,7 +615,7 @@ sensor:
   # +Eac_discharge_total: addr 66(HI), 67(LO)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: ac_discharge_energy_total_kwh
+    id: ac_discharge_energy_total
     name: "AC discharge energy total"
     address: 66
     register_type: read
@@ -604,7 +630,7 @@ sensor:
   # ACChrCurr: addr 68 - AC Charging Battery Current (need test)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: ac_charging_battery_current_a
+    id: ac_charging_battery_current
     name: "AC Charging Battery Current"
     address: 68
     register_type: read
@@ -618,25 +644,25 @@ sensor:
 
   # AC_DischrWatt: addr 69(HI), 70(LO) - (for on-grid model?)
   # AC_DischrVA: addr 71(HI), 72(LO) - (for on-grid model?)
-  # +Bat_DischrWatt: addr 73(HI), 74(LO) - not needed use batt_power_W at addr 77
-  # - platform: modbus_controller
-  #   modbus_controller_id: growatt
-  #   id: batt_discharging_power_w
-  #   name: "Battery discharging power"
-  #   address: 73
-  #   register_type: read
-  #   value_type: S_DWORD
-  #   unit_of_measurement: "W"
-  #   device_class: power
-  #   state_class: measurement
-  #   accuracy_decimals: 1
-  #   filters:
-  #     - multiply: 0.1
+  # +Bat_DischrWatt: addr 73(HI), 74(LO)
+  - platform: modbus_controller
+    modbus_controller_id: growatt
+    id: battery_discharging_power
+    name: "Battery discharging power"
+    address: 73
+    register_type: read
+    value_type: S_DWORD
+    unit_of_measurement: "W"
+    device_class: power
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
 
   # +Bat_DischrVA: addr 75(HI), 76(LO)
   - platform: modbus_controller
     modbus_controller_id: growatt
-    id: batt_discharging_va
+    id: battery_discharging_apparent_power
     name: "Battery discharging apparent power"
     address: 75
     register_type: read
@@ -651,8 +677,8 @@ sensor:
   # +Battery power: addr 77(HI), 78(LO)
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: battery_power
     name: "Battery power"
-    id: batt_power_w
     address: 77
     register_type: read
     value_type: S_DWORD
@@ -669,6 +695,7 @@ sensor:
   # +MpptFanSpeed: addr 81
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: mppt_fan_speed
     name: "MPPT fan speed"
     address: 81
     register_type: read
@@ -682,6 +709,7 @@ sensor:
   # +InvFanSpeed: addr 82
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: inv_fan_speed
     name: "Fan speed"
     address: 82
     register_type: read
@@ -695,6 +723,7 @@ sensor:
   # +TotalChgCurr: addr 83
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: total_charge_current
     name: "Total charge current"
     address: 83
     register_type: read
@@ -709,6 +738,7 @@ sensor:
   # +TotalDisChgCurr: addr 84
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: total_discharge_current
     name: "Total discharge current"
     address: 84
     register_type: read
@@ -723,6 +753,7 @@ sensor:
   # Eop_dischrToday: addr 85(HI), 86(LO) - (need test)
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: discharge_energy_today
     name: "Discharge energy today"
     address: 85
     register_type: read
@@ -737,6 +768,7 @@ sensor:
   # Eop_dischrTotal: addr 87(HI), 88(LO) - (need test)
   - platform: modbus_controller
     modbus_controller_id: growatt
+    id: discharge_energy_total
     name: "Discharge energy total"
     address: 87
     register_type: read
