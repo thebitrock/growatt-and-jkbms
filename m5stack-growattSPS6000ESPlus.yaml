@@ -799,13 +799,8 @@ sensor:
     filters:
       - multiply: 0.1
 
-  # Current Monitoring and Power Flow (68-84)
-  # AC Charging Current (addr 68): Current flow from grid to battery, scale 0.1A
-  # Battery Discharge Power (addr 73-74): 32-bit signed, scale 0.1W
-  # Battery Power (addr 77-78): Signed 32-bit, positive=discharge, negative=charge
-  # Fan Speeds (addr 81-82): MPPT and Inverter fan speeds, 0-100%
-  # Total Charge/Discharge Currents (addr 83-84): System totals, scale 0.1A
-  # ACChrCurr: addr 68 - AC Charging Battery Current (need test)
+
+  # ACChrCurr: AC Charging Current (addr 68): Current flow from grid to battery, scale 0.1A
   # Current flowing from grid to battery during AC charging, scale 0.1A
   - platform: modbus_controller
     modbus_controller_id: growatt
@@ -821,8 +816,7 @@ sensor:
     filters:
       - multiply: 0.1
 
-  # AC_DischrWatt: addr 69(HI), 70(LO) - (for on-grid model?)
-  # Power discharged to grid (reverse power flow), 32-bit signed, scale 0.1W (typically 0 for off-grid)
+  # AC_DischrWatt: Power discharged to grid (reverse power flow), 32-bit signed, scale 0.1W (typically 0 for off-grid)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_discharging_power
@@ -837,8 +831,8 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
-  # AC_DischrVA: addr 71(HI), 72(LO) - (for on-grid model?)
-  # Apparent power discharged to grid, 32-bit signed, scale 0.1VA (typically 0 for off-grid)
+
+  # AC_DischrVA: Apparent power discharged to grid, 32-bit signed, scale 0.1VA (typically 0 for off-grid)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_discharging_apparent_power
@@ -854,8 +848,7 @@ sensor:
     filters:
       - multiply: 0.1
 
-  # Bat_DischrWatt: addr 73(HI), 74(LO)
-  # Battery discharge power (power flowing from battery), 32-bit signed, scale 0.1W
+  # Bat_DischrWatt: Battery discharge power (power flowing from battery), 32-bit signed, scale 0.1W
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: battery_discharging_power
@@ -870,8 +863,7 @@ sensor:
     filters:
       - multiply: 0.1
 
-  # Bat_DischrVA: addr 75(HI), 76(LO)
-  # Battery discharge apparent power, 32-bit signed, scale 0.1VA
+  # Bat_DischrVA: Battery discharge apparent power, 32-bit signed, scale 0.1VA
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: battery_discharging_apparent_power
@@ -886,7 +878,6 @@ sensor:
     filters:
       - multiply: 0.1
 
-  # Battery power: addr 77(HI), 78(LO)
   # Net battery power: positive=discharge, negative=charge, 32-bit signed, scale 0.1W
   - platform: modbus_controller
     modbus_controller_id: growatt
@@ -905,8 +896,7 @@ sensor:
   # uwSlaveExistCnt: addr 79 - number of parallel units (1-4)
   # BatOverCharge: addr 80 - always 0?
 
-  # MpptFanSpeed: addr 81
-  # MPPT cooling fan speed percentage, range 0-100%
+  # MpptFanSpeed: MPPT cooling fan speed percentage, range 0-100%
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: mppt_fan_speed
@@ -920,8 +910,7 @@ sensor:
     filters:
       - multiply: 1
 
-  # +InvFanSpeed: addr 82
-  # Inverter cooling fan speed percentage, range 0-100%
+  # InvFanSpeed: Inverter cooling fan speed percentage, range 0-100%
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: inv_fan_speed
@@ -935,8 +924,7 @@ sensor:
     filters:
       - multiply: 1
 
-  # +TotalChgCurr: addr 83
-  # Total charging current to battery from all sources (PV+AC), scale 0.1A
+  # TotalChgCurr: Total charging current to battery from all sources (PV+AC), scale 0.1A
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: total_charge_current
@@ -951,8 +939,7 @@ sensor:
     filters:
       - multiply: 0.1
 
-  # +TotalDisChgCurr: addr 84
-  # Total discharge current from battery, scale 0.1A
+  # TotalDisChgCurr: Total discharge current from battery, scale 0.1A
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: total_discharge_current
@@ -967,12 +954,8 @@ sensor:
     filters:
       - multiply: 0.1
 
-  # Additional Energy Counters and Parallel System Info (85-89)
-  # Output Discharge Energy (addr 85-86, 87-88): Alternative load energy counters
-  # Parallel Charge Current (addr 89): Total charging current in parallel systems
   # These registers may duplicate earlier energy counters or provide parallel system data
-  # Eop_dischrToday: addr 85(HI), 86(LO) - (need test)
-  # Output discharge energy today (alternative to AC discharge), 32-bit value, scale 0.1kWh
+  # Eop_dischrToday: Output discharge energy today (alternative to AC discharge), 32-bit value, scale 0.1kWh
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: discharge_energy_today
@@ -987,8 +970,7 @@ sensor:
     filters:
       - multiply: 0.1
 
-  # Eop_dischrTotal: addr 87(HI), 88(LO) - (need test)
-  # Output discharge energy lifetime (alternative to AC discharge), 32-bit value, scale 0.1kWh
+  # Discharge energy total (alternative to AC discharge), 32‑bit (87–88), ×0.1 kWh.
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: discharge_energy_total
@@ -1003,7 +985,7 @@ sensor:
     filters:
       - multiply: 0.1
 
-  # ParaChgCurr: addr 89 - Total paralleling charge current
+  # ParaChgCurr: Parallel Charge Current (addr 89): Total charging current in parallel systems
   # ParaChgCurr: addr 90 (duplicate?)
 
   # ParaDischgCurr: addr 91 - Total paralleling discharge current
@@ -1075,7 +1057,7 @@ sensor:
   # HOLDING REGISTERS - Sensors for configuration and control (sorted by address)
   # ==============================================================================
 
-  # Battery Type Code: addr 39 (holding register)
+  # Battery type code (or FW/COM build code depending on firmware)
   # Battery type configuration: 0=AGM, 1=Flooded, 2=User, 3=Lithium, 4=User2
   - platform: modbus_controller
     modbus_controller_id: growatt
