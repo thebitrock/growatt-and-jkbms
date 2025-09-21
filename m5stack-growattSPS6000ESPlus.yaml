@@ -52,7 +52,12 @@ sensor:
   # READ REGISTERS - Sensors for reading data from the inverter (sorted by address)
   # ==============================================================================
 
+  # Status and Control Registers (0-2)
+  # System Status: Operating mode codes (0=Standby, 1=PV+Grid Discharge, 2=Discharge,
+  # 3=Fault, 4=Flash, 5=PV charge, 6=AC charge, 7=Combine charge, etc.)
   # System status code: addr 0
+  # Inverter operating mode: 0=Standby, 1=PV+Grid Discharge, 2=Discharge, 3=Fault,
+  # 4=Flash, 5=PV charge, 6=AC charge, 7=Combine charge, 8=Combine+Bypass, etc.
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: system_status_code
@@ -64,6 +69,7 @@ sensor:
     accuracy_decimals: 0
 
   # PV1 voltage: addr 1
+  # Solar panel 1 input voltage measurement, scale 0.1V (e.g. 330 = 33.0V)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: pv1_voltage
@@ -79,6 +85,7 @@ sensor:
       - multiply: 0.1
 
   # PV2 voltage: addr 2
+  # Solar panel 2 input voltage measurement, scale 0.1V (returns 0 if single MPPT)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: pv2_voltage
@@ -93,7 +100,11 @@ sensor:
     filters:
       - multiply: 0.1
 
+  # PV Input Power and Current Registers (3-8)
+  # PV Voltage (addr 1-2): Scale 0.1V, PV Power (addr 3-6): 32-bit values, scale 0.1W
+  # Buck Current (addr 7-8): DC-DC converter current for PV1/PV2, scale 0.1A
   # PV1 power: addr 3(HI), 4(LO) (need test)
+  # Solar panel 1 active power output, 32-bit value, scale 0.1W
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: pv1_power
@@ -109,6 +120,7 @@ sensor:
       - multiply: 0.1
 
   # PV2 power: addr 5(HI), 6(LO) (need test)
+  # Solar panel 2 active power output, 32-bit value, scale 0.1W
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: pv2_power
@@ -124,6 +136,7 @@ sensor:
       - multiply: 0.1
 
   # PV1 buck current Buck1Curr: addr 7
+  # DC-DC converter 1 charging current from PV1, scale 0.1A (e.g. 123 = 12.3A)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: pv1_buck_current_a
@@ -139,6 +152,7 @@ sensor:
       - multiply: 0.1
 
   # PV2 buck current Buck2Curr: addr 8
+  # DC-DC converter 2 charging current from PV2, scale 0.1A (0 if single MPPT)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: pv2_buck_current
@@ -153,7 +167,12 @@ sensor:
     filters:
       - multiply: 0.1
 
+  # AC Output Power and Load Registers (9-16)
+  # Output Active Power (addr 9-10): 32-bit, scale 0.1W
+  # Output Apparent Power (addr 11-12): 32-bit, scale 0.1VA
+  # AC Output Voltage (addr 13): scale 0.1V, Frequency (addr 14): scale 0.01Hz
   # AC output power: addr 9(HI), 10(LO)
+  # Inverter AC output active power to load, 32-bit value, scale 0.1W
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_output_power
@@ -169,6 +188,7 @@ sensor:
       - multiply: 0.1
 
   # +AC output VA: addr 11(HI), 12(LO)
+  # Inverter AC output apparent power (VA), 32-bit value, scale 0.1VA
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_output_apparent_power
@@ -184,6 +204,7 @@ sensor:
       - multiply: 0.1
 
   # AC charge power: addr 13(HI), 14(LO) - (need test)
+  # AC charging power from grid to battery, 32-bit value, scale 0.1W
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_charge_power
@@ -199,6 +220,7 @@ sensor:
       - multiply: 0.1
 
   # Undefined: addr 15(HI), 16(LO)
+  # Unknown/reserved register pair, purpose unclear for SPF 6000 ES Plus
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: read_15_16
@@ -214,7 +236,12 @@ sensor:
     filters:
       - multiply: 0.1
 
+  # Battery and DC Bus Registers (17-19)
+  # Battery Voltage (addr 17): scale 0.01V, SOC (addr 18): percentage 0-100%
+  # DC Bus Voltage (addr 19): internal DC bus voltage, scale 0.1V
   # DcDc Temp
+  # Battery voltage: addr 17
+  # Main battery voltage measurement, scale 0.01V for high precision (e.g. 5213 = 52.13V)
   - platform: modbus_controller
     modbus_controller_id: growatt
     name: "Battery voltage"
@@ -230,6 +257,7 @@ sensor:
       - multiply: 0.01
 
   # Battery SOC: addr 18
+  # Battery State of Charge percentage, range 0-100%
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: battery_soc
@@ -243,6 +271,7 @@ sensor:
     accuracy_decimals: 0
 
   # DC bus voltage: addr 19
+  # Internal DC bus voltage (intermediate circuit), scale 0.1V
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: dc_bus_voltage
@@ -257,7 +286,11 @@ sensor:
     filters:
       - multiply: 0.1
 
+  # AC Input Parameters (20-23)
+  # Grid Voltage (addr 20): scale 0.1V, Line Frequency (addr 21): scale 0.01Hz
+  # Output Voltage/Frequency (addr 22-23): duplicates of addr 13-14
   # AC input voltage: addr 20
+  # Grid/generator input voltage measurement, scale 0.1V (e.g. 2345 = 234.5V)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_input_voltage
@@ -273,6 +306,7 @@ sensor:
       - multiply: 0.1
 
   # AC input frequency: addr 21
+  # Grid/generator input frequency, scale 0.01Hz (e.g. 5998 = 59.98Hz)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_input_frequency
@@ -288,6 +322,7 @@ sensor:
       - multiply: 0.01
 
   # AC output voltage: addr 22
+  # Inverter AC output voltage, scale 0.1V (duplicate of addr 13)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_output_voltage
@@ -303,6 +338,7 @@ sensor:
       - multiply: 0.1
 
   # AC output frequency: addr 23
+  # Inverter AC output frequency, scale 0.01Hz (duplicate of addr 14)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_output_frequency
@@ -317,7 +353,15 @@ sensor:
     filters:
       - multiply: 0.01
 
+  # Temperature and Load Monitoring (24-35)
+  # Inverter Temperature (addr 25-26): scale 0.1°C
+  # Load Percent (addr 27): scale 0.1%, range 0.0-100.0%
+  # Battery Voltages (addr 28-29): high precision measurements, scale 0.01V
+  # Total Runtime (addr 30-31): 32-bit, scale 0.5 seconds
+  # MPPT Temperatures (addr 32-33): Buck1/Buck2 NTC sensors, scale 0.1°C
+  # Output Current (addr 34): scale 0.1A, Inverter Current (addr 35): scale 0.1A
   # Output DC voltage: addr 24 - always 2 for spf6000ESplus?
+  # DC output voltage (if available), typically unused in SPF models
   - platform: modbus_controller
     internal: true
     modbus_controller_id: growatt
@@ -332,6 +376,7 @@ sensor:
     accuracy_decimals: 1
 
   # InvTemp: addr 25
+  # Inverter main power module temperature, scale 0.1°C (e.g. 350 = 35.0°C)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: inverter_temperature
@@ -347,6 +392,7 @@ sensor:
       - multiply: 0.1
 
   # DcDc Temp: addr 26
+  # DC-DC converter (PV charging module) temperature, scale 0.1°C
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: dc_dc_temperature
@@ -362,6 +408,7 @@ sensor:
       - multiply: 0.1
 
   # LoadPercent: addr 27
+  # Current load as percentage of inverter capacity, scale 0.1% (e.g. 255 = 25.5%)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: load_percent
@@ -376,6 +423,7 @@ sensor:
       - multiply: 0.1
 
   # Bat_s_Volt: addr 28 - return 0
+  # Battery port voltage (DSP measurement), typically returns 0 for SPF 6000 ES Plus
   - platform: modbus_controller
     modbus_controller_id: growatt
     name: "Battery port voltage"
@@ -389,6 +437,7 @@ sensor:
     state_class: measurement
 
   # Bat_Volt_DSP: addr 29 - return 0
+  # Battery voltage DSP reading, scale 0.01V, typically returns 0 for SPF 6000 ES Plus
   - platform: modbus_controller
     modbus_controller_id: growatt
     name: "Battery voltage DSP"
@@ -405,6 +454,7 @@ sensor:
       - multiply: 0.01
 
   # Time total H: addr 30 (HI), 31 (LO) - inverter total runtime
+  # Total inverter operating time, 32-bit value, scale 0.5 seconds
   # Formula: ((Time_total_H << 16) | Time_total_L) * 0.5 seconds
   # Step = 0.5 seconds, converted to hours by dividing by 3600
   # NOTE: Returns 0 - possibly not supported by SPF 6000 ES Plus or resets on power cycle
@@ -421,6 +471,7 @@ sensor:
     accuracy_decimals: 1
 
   # Buck1_NTC: addr 32
+  # MPPT1 temperature sensor (Buck1 NTC), scale 0.1°C
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: mppt1_temperature
@@ -436,6 +487,7 @@ sensor:
       - multiply: 0.1
 
   # Buck2_NTC: addr 33
+  # MPPT2 temperature sensor (Buck2 NTC), scale 0.1°C (0 if single MPPT)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: mppt2_temperature
@@ -451,6 +503,7 @@ sensor:
       - multiply: 0.1
 
   # OP_Curr: addr 34
+  # AC output current (load current), scale 0.1A (e.g. 25 = 2.5A)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_output_current
@@ -466,6 +519,7 @@ sensor:
       - multiply: 0.1
 
   # Inv_Curr: addr 35
+  # DC current from battery to inverter, scale 0.1A (positive during discharge)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: battery_to_inverter_current
@@ -480,7 +534,12 @@ sensor:
     filters:
       - multiply: 0.1
 
+  # AC Input Power and Apparent Power (36-39)
+  # AC Input Active Power (addr 36-37): 32-bit, scale 0.1W
+  # AC Input Apparent Power (addr 38-39): 32-bit, scale 0.1VA
+  # These registers show power consumption from grid (for charging or bypass)
   # AC_InWatt: addr 36(HI), 37(LO) (need test)
+  # AC input power from grid (for charging or bypass), 32-bit value, scale 0.1W
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_input_power
@@ -496,6 +555,7 @@ sensor:
       - multiply: 0.1
 
   # AC_InVA: addr 38(HI), 39(LO) (need test)
+  # AC input apparent power from grid, 32-bit value, scale 0.1VA
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_input_apparent_power
@@ -510,7 +570,14 @@ sensor:
     filters:
       - multiply: 0.1
 
+  # Fault and Warning Status (40-44)
+  # Fault Bits (addr 40): 16-bit field for critical errors
+  # Warning Bits (addr 41-42): Low/High 16-bit fields for warnings
+  # Fault/Warning Codes (addr 42-43): Numeric codes for active issues
+  # Device Type Code (addr 44): Model identification (034xx for SPF 3-5K series)
   # Fault Bits: addr 40
+  # 16-bit fault status field: bit1=Over Temperature, bit2=Bat Voltage High,
+  # bit3=Bat Voltage Low, bit4=Output short, bit5=Output voltage high, etc.
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: fault_bits
@@ -521,6 +588,8 @@ sensor:
     accuracy_decimals: 0
 
   # Warn Bits: addr 41
+  # 16-bit warning status field (low): bit0=Fan lock, bit1=Battery over charge,
+  # bit2=Battery low, bit3=Over load, bit4=Output power derating, etc.
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: warning_bits
@@ -531,6 +600,7 @@ sensor:
     accuracy_decimals: 0
 
   # Fault Code: addr 42
+  # Numeric fault code for active critical errors (0 = no fault)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: fault_code
@@ -541,6 +611,7 @@ sensor:
     accuracy_decimals: 0
 
   # Warning Code: addr 43
+  # Numeric warning code for active warnings (0 = no warning)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: warning_code
@@ -551,6 +622,7 @@ sensor:
     accuracy_decimals: 0
 
   # DSP firmware: addr 44
+  # Device Type Code (DTC) for model identification (034xx for SPF 3-5K series)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: dsp_firmware
@@ -560,10 +632,13 @@ sensor:
     value_type: U_WORD
     accuracy_decimals: 0
 
+  # Reserved Registers (45-47)
+  # Registers 45-47 are typically reserved or unused
 
   # Energy counters and system currents (registers 45–89)
 
   # Epv1_today: addr 48(HI), 49(LO) - today energy from pv1+pv2 (not pv1 only)
+  # Total PV energy generated today (PV1+PV2 combined), 32-bit value, scale 0.1kWh
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: pv_energy_today
@@ -579,6 +654,7 @@ sensor:
       - multiply: 0.1
 
   # Epv1_total: addr 50(HI), 51(LO) - total energy from pv1+pv2 (not pv1 only)
+  # Total PV energy generated lifetime (PV1+PV2 combined), 32-bit value, scale 0.1kWh
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: pv_energy_total
@@ -594,6 +670,7 @@ sensor:
       - multiply: 0.1
 
   # Epv2_today: addr 52(HI), 53(LO) - (not works for spf6000ESplus)
+  # PV2 energy generated today, 32-bit value, scale 0.01kWh (unused in SPF 6000 ES Plus)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: pv2_energy_today_kwh
@@ -610,6 +687,7 @@ sensor:
       - multiply: 0.01
 
   # Epv2_total: addr 54(HI), 55(LO) - (not works for spf6000ESplus)
+  # PV2 energy generated lifetime, 32-bit value, scale 0.01kWh (unused in SPF 6000 ES Plus)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: pv2_energy_total_kwh
@@ -626,6 +704,7 @@ sensor:
       - multiply: 0.01
 
   # Eac_charge_today: addr 56(HI), 57(LO)
+  # Energy charged from grid to battery today, 32-bit value, scale 0.1kWh
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_charge_energy_today
@@ -641,6 +720,7 @@ sensor:
       - multiply: 0.1
 
   # Eac_charge_total: addr 58(HI), 59(LO)
+  # Energy charged from grid to battery lifetime, 32-bit value, scale 0.1kWh
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_charge_energy_total
@@ -656,6 +736,7 @@ sensor:
       - multiply: 0.1
 
   # Ebat_discharge_today: addr 60(HI), 61(LO)
+  # Energy discharged from battery today, 32-bit value, scale 0.1kWh
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: battery_discharge_energy_today
@@ -671,6 +752,7 @@ sensor:
       - multiply: 0.1
 
   # Ebat_discharge_total: addr 62(HI), 63(LO)
+  # Energy discharged from battery lifetime, 32-bit value, scale 0.1kWh
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: battery_discharge_energy_total
@@ -686,6 +768,7 @@ sensor:
       - multiply: 0.1
 
   # Eac_discharge_today: addr 64(HI), 65(LO)
+  # Energy delivered to AC load today (inverter output), 32-bit value, scale 0.1kWh
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_discharge_energy_today
@@ -701,6 +784,7 @@ sensor:
       - multiply: 0.1
 
   # Eac_discharge_total: addr 66(HI), 67(LO)
+  # Energy delivered to AC load lifetime (inverter output), 32-bit value, scale 0.1kWh
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_discharge_energy_total
@@ -715,7 +799,14 @@ sensor:
     filters:
       - multiply: 0.1
 
+  # Current Monitoring and Power Flow (68-84)
+  # AC Charging Current (addr 68): Current flow from grid to battery, scale 0.1A
+  # Battery Discharge Power (addr 73-74): 32-bit signed, scale 0.1W
+  # Battery Power (addr 77-78): Signed 32-bit, positive=discharge, negative=charge
+  # Fan Speeds (addr 81-82): MPPT and Inverter fan speeds, 0-100%
+  # Total Charge/Discharge Currents (addr 83-84): System totals, scale 0.1A
   # ACChrCurr: addr 68 - AC Charging Battery Current (need test)
+  # Current flowing from grid to battery during AC charging, scale 0.1A
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_charging_battery_current
@@ -731,6 +822,7 @@ sensor:
       - multiply: 0.1
 
   # AC_DischrWatt: addr 69(HI), 70(LO) - (for on-grid model?)
+  # Power discharged to grid (reverse power flow), 32-bit signed, scale 0.1W (typically 0 for off-grid)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_discharging_power
@@ -746,6 +838,7 @@ sensor:
     filters:
       - multiply: 0.1
   # AC_DischrVA: addr 71(HI), 72(LO) - (for on-grid model?)
+  # Apparent power discharged to grid, 32-bit signed, scale 0.1VA (typically 0 for off-grid)
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: ac_discharging_apparent_power
@@ -762,6 +855,7 @@ sensor:
       - multiply: 0.1
 
   # Bat_DischrWatt: addr 73(HI), 74(LO)
+  # Battery discharge power (power flowing from battery), 32-bit signed, scale 0.1W
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: battery_discharging_power
@@ -777,6 +871,7 @@ sensor:
       - multiply: 0.1
 
   # Bat_DischrVA: addr 75(HI), 76(LO)
+  # Battery discharge apparent power, 32-bit signed, scale 0.1VA
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: battery_discharging_apparent_power
@@ -792,6 +887,7 @@ sensor:
       - multiply: 0.1
 
   # Battery power: addr 77(HI), 78(LO)
+  # Net battery power: positive=discharge, negative=charge, 32-bit signed, scale 0.1W
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: battery_power
@@ -810,6 +906,7 @@ sensor:
   # BatOverCharge: addr 80 - always 0?
 
   # MpptFanSpeed: addr 81
+  # MPPT cooling fan speed percentage, range 0-100%
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: mppt_fan_speed
@@ -824,6 +921,7 @@ sensor:
       - multiply: 1
 
   # +InvFanSpeed: addr 82
+  # Inverter cooling fan speed percentage, range 0-100%
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: inv_fan_speed
@@ -838,6 +936,7 @@ sensor:
       - multiply: 1
 
   # +TotalChgCurr: addr 83
+  # Total charging current to battery from all sources (PV+AC), scale 0.1A
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: total_charge_current
@@ -853,6 +952,7 @@ sensor:
       - multiply: 0.1
 
   # +TotalDisChgCurr: addr 84
+  # Total discharge current from battery, scale 0.1A
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: total_discharge_current
@@ -867,7 +967,12 @@ sensor:
     filters:
       - multiply: 0.1
 
+  # Additional Energy Counters and Parallel System Info (85-89)
+  # Output Discharge Energy (addr 85-86, 87-88): Alternative load energy counters
+  # Parallel Charge Current (addr 89): Total charging current in parallel systems
+  # These registers may duplicate earlier energy counters or provide parallel system data
   # Eop_dischrToday: addr 85(HI), 86(LO) - (need test)
+  # Output discharge energy today (alternative to AC discharge), 32-bit value, scale 0.1kWh
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: discharge_energy_today
@@ -883,6 +988,7 @@ sensor:
       - multiply: 0.1
 
   # Eop_dischrTotal: addr 87(HI), 88(LO) - (need test)
+  # Output discharge energy lifetime (alternative to AC discharge), 32-bit value, scale 0.1kWh
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: discharge_energy_total
@@ -969,6 +1075,8 @@ sensor:
   # HOLDING REGISTERS - Sensors for configuration and control (sorted by address)
   # ==============================================================================
 
+  # Battery Type Code: addr 39 (holding register)
+  # Battery type configuration: 0=AGM, 1=Flooded, 2=User, 3=Lithium, 4=User2
   - platform: modbus_controller
     modbus_controller_id: growatt
     id: battery_type_code
