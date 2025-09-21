@@ -20,21 +20,31 @@ views:
               - type: entity
                 show_icon: false
                 entity: sensor.growatt_ac_output_voltage
+                tap_action:
+                  action: more-info
               - type: entity
                 show_icon: false
                 entity: sensor.growatt_ac_output_frequency
+                tap_action:
+                  action: more-info
               - type: entity
                 show_icon: false
                 entity: sensor.growatt_ac_output_power
+                tap_action:
+                  action: more-info
               - type: entity
                 show_icon: false
                 entity: sensor.growatt_ac_output_apparent_power
+                tap_action:
+                  action: more-info
           - type: heading
             heading_style: subtitle
             icon: ''
             badges:
               - type: entity
                 entity: sensor.system_status
+                tap_action:
+                  action: more-info
             grid_options:
               columns: 6
               rows: auto
@@ -48,15 +58,21 @@ views:
                 entity: sensor.growatt_load_percent
                 icon: mdi:fire
                 color: green
+                tap_action:
+                  action: more-info
               - type: entity
                 show_state: true
                 show_icon: true
                 entity: sensor.growatt_fan_speed
                 icon: mdi:fan
                 color: cyan
+                tap_action:
+                  action: more-info
               - type: entity
                 show_icon: false
                 entity: sensor.growatt_ac_output_current
+                tap_action:
+                  action: more-info
             grid_options:
               columns: 6
               rows: auto
@@ -68,15 +84,23 @@ views:
               - type: entity
                 show_icon: false
                 entity: sensor.growatt_ac_input_voltage
+                tap_action:
+                  action: more-info
               - type: entity
                 show_icon: false
                 entity: sensor.growatt_ac_input_frequency
+                tap_action:
+                  action: more-info
               - type: entity
                 show_icon: false
                 entity: sensor.growatt_ac_input_power
+                tap_action:
+                  action: more-info
               - type: entity
                 show_icon: false
                 entity: sensor.growatt_ac_input_apparent_power
+                tap_action:
+                  action: more-info
           - type: heading
             heading: MPPT
             heading_style: subtitle
@@ -89,18 +113,26 @@ views:
                 icon: mdi:fan
                 color: primary
                 state_content: state
+                tap_action:
+                  action: more-info
               - type: entity
                 show_state: true
                 show_icon: true
                 entity: sensor.growatt_pv_energy_today
                 color: green
+                tap_action:
+                  action: more-info
           - type: heading
             heading_style: subtitle
             badges:
               - type: entity
                 entity: sensor.growatt_pv1_buck_current
+                tap_action:
+                  action: more-info
               - type: entity
                 entity: sensor.growatt_mppt1_temperature
+                tap_action:
+                  action: more-info
             grid_options:
               columns: 6
               rows: auto
@@ -110,9 +142,13 @@ views:
             heading_style: subtitle
             badges:
               - type: entity
-                entity: sensor.growatt_pv1_buck_current
+                entity: sensor.growatt_pv2_buck_current
+                tap_action:
+                  action: more-info
               - type: entity
                 entity: sensor.growatt_mppt2_temperature
+                tap_action:
+                  action: more-info
             grid_options:
               columns: 6
               rows: auto
@@ -121,33 +157,39 @@ views:
           - graph: line
             type: sensor
             entity: sensor.growatt_pv1_power
-            detail: 1
+            detail: 2
             name: Power
+            hours_to_show: 16
           - graph: line
             type: sensor
-            entity: sensor.growatt_pv1_power
-            detail: 1
+            entity: sensor.growatt_pv2_power
+            detail: 2
             name: Power
+            hours_to_show: 16
           - graph: line
             type: sensor
             entity: sensor.growatt_pv1_voltage
-            detail: 1
+            detail: 2
             name: Voltage
+            hours_to_show: 16
           - graph: line
             type: sensor
             entity: sensor.growatt_pv2_voltage
-            detail: 1
+            detail: 2
             name: Voltage
+            hours_to_show: 16
           - graph: line
             type: sensor
             entity: sensor.pv1_current
-            detail: 1
+            detail: 2
             name: Current
+            hours_to_show: 16
           - graph: line
             type: sensor
             entity: sensor.pv2_current
-            detail: 1
+            detail: 2
             name: Current
+            hours_to_show: 16
           - chart_type: line
             period: 5minute
             type: statistics-graph
@@ -156,9 +198,22 @@ views:
               - sensor.growatt_pv2_power
             stat_types:
               - mean
-            days_to_show: 1
+            days_to_show: 0.5
             hide_legend: true
-            logarithmic_scale: true
+            logarithmic_scale: false
+          - chart_type: line
+            period: 5minute
+            type: statistics-graph
+            entities:
+              - sensor.pv1_current
+              - sensor.pv2_current
+              - sensor.growatt_pv1_buck_current
+              - sensor.growatt_pv2_buck_current
+            stat_types:
+              - mean
+            hide_legend: false
+            logarithmic_scale: false
+            days_to_show: 0.5
           - chart_type: line
             period: 5minute
             type: statistics-graph
@@ -166,13 +221,10 @@ views:
               - sensor.growatt_discharge_energy_today
             stat_types:
               - mean
-            days_to_show: 1
-            hide_legend: true
-            logarithmic_scale: true
+            hide_legend: false
+            logarithmic_scale: false
+            days_to_show: 0.8
             title: Discharge energy today
-          - type: entities
-            entities:
-              - sensor.growatt_discharge_energy_today
       - type: grid
         cards:
           - type: heading
@@ -187,29 +239,39 @@ views:
                 icon: mdi:battery-plus-variant
                 name: Total Capacity
                 color: teal
+                tap_action:
+                  action: more-info
               - type: entity
                 show_state: true
                 show_icon: true
                 entity: sensor.jk_bms_pack_1_total_runtime_formatted
                 icon: mdi:battery-clock
                 color: indigo
+                tap_action:
+                  action: more-info
               - type: entity
                 show_state: true
                 show_icon: true
                 entity: sensor.jk_bms_pack_1_charging_cycles
                 icon: mdi:unicycle
                 color: deep-purple
+                tap_action:
+                  action: more-info
               - type: entity
                 show_state: true
                 show_icon: true
-                entity: sensor.jk_bms_pack_1_actual_battery_capacity
-                color: green
+                entity: sensor.pack_1_capacity_kwh
+                color: teal
+                tap_action:
+                  action: more-info
               - type: entity
                 show_state: true
                 show_icon: true
                 entity: sensor.jk_bms_pack_1_capacity_remaining_derived
                 icon: mdi:battery-arrow-down
                 color: accent
+                tap_action:
+                  action: more-info
             grid_options:
               columns: 12
               rows: 1
@@ -217,7 +279,6 @@ views:
             graph: line
             detail: 2
             name: SOC
-            icon: mdi:battery
             entity: sensor.jk_bms_pack_1_state_of_charge
             grid_options:
               columns: 6
@@ -250,14 +311,24 @@ views:
                 show_icon: true
                 entity: sensor.jk_bms_pack_1_temperature_sensor_1
                 color: state
+                tap_action:
+                  action: more-info
               - type: entity
                 entity: sensor.jk_bms_pack_1_temperature_sensor_2
+                tap_action:
+                  action: more-info
               - type: entity
                 entity: sensor.jk_bms_pack_1_temperature_sensor_3
+                tap_action:
+                  action: more-info
               - type: entity
                 entity: sensor.jk_bms_pack_1_temperature_sensor_4
+                tap_action:
+                  action: more-info
               - type: entity
                 entity: sensor.jk_bms_pack_1_temperature_sensor_5
+                tap_action:
+                  action: more-info
           - type: heading
             icon: mdi:chip
             heading: Mosfet
@@ -265,6 +336,8 @@ views:
             badges:
               - type: entity
                 entity: sensor.jk_bms_pack_1_mosfet_temperature
+                tap_action:
+                  action: more-info
           - type: heading
             icon: mdi:alarm-light-outline
             heading: Alarm
@@ -275,9 +348,35 @@ views:
                 show_icon: true
                 entity: sensor.jk_bms_pack_1_alarms
                 icon: none
+                tap_action:
+                  action: more-info
             grid_options:
               columns: full
               rows: auto
+          - square: false
+            type: grid
+            cards:
+              - type: heading
+                heading_style: subtitle
+                badges: []
+                grid_options:
+                  columns: 1
+                heading: Delta cell volt.
+              - type: heading
+                heading_style: subtitle
+                badges:
+                  - type: entity
+                    show_state: true
+                    show_icon: false
+                    entity: sensor.jk_bms_pack_1_delta_cell_voltage
+                    tap_action:
+                      action: more-info
+                grid_options:
+                  columns: 1
+            grid_options:
+              columns: 3
+              rows: auto
+            columns: 1
           - square: false
             type: grid
             columns: 2
@@ -291,10 +390,14 @@ views:
                     name: Cell 1 V
                     icon: none
                     entity: sensor.jk_bms_pack_1_cell_voltage_1
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 1 R
                     entity: sensor.jk_bms_pack_1_cell_1_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -302,10 +405,14 @@ views:
                     icon: none
                     name: Cell 9 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_9
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 9 R
                     entity: sensor.jk_bms_pack_1_cell_9_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -313,10 +420,14 @@ views:
                     icon: none
                     name: Cell 2 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_2
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 2 R
                     entity: sensor.jk_bms_pack_1_cell_2_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -324,10 +435,14 @@ views:
                     icon: none
                     name: Cell 10 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_10
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 10 R
                     entity: sensor.jk_bms_pack_1_cell_10_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -335,10 +450,14 @@ views:
                     icon: none
                     name: Cell 3 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_3
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 3 R
                     entity: sensor.jk_bms_pack_1_cell_3_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -346,10 +465,14 @@ views:
                     icon: none
                     name: Cell 11 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_11
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 11 R
                     entity: sensor.jk_bms_pack_1_cell_11_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -357,10 +480,14 @@ views:
                     icon: none
                     name: Cell 4 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_4
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 4 R
                     entity: sensor.jk_bms_pack_1_cell_4_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -368,10 +495,14 @@ views:
                     icon: none
                     name: Cell 12 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_12
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 12 R
                     entity: sensor.jk_bms_pack_1_cell_12_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -379,10 +510,14 @@ views:
                     icon: none
                     name: Cell 5 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_5
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 5 R
                     entity: sensor.jk_bms_pack_1_cell_5_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -390,10 +525,14 @@ views:
                     icon: none
                     name: Cell 13 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_13
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 13 R
                     entity: sensor.jk_bms_pack_1_cell_13_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -401,10 +540,14 @@ views:
                     icon: none
                     name: Cell 6 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_6
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 6 R
                     entity: sensor.jk_bms_pack_1_cell_6_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -412,10 +555,14 @@ views:
                     icon: none
                     name: Cell 14 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_14
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 14 R
                     entity: sensor.jk_bms_pack_1_cell_14_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -423,10 +570,14 @@ views:
                     icon: none
                     name: Cell 7 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_7
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 7 R
                     entity: sensor.jk_bms_pack_1_cell_7_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -434,10 +585,14 @@ views:
                     icon: none
                     name: Cell 15 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_15
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 15 R
                     entity: sensor.jk_bms_pack_1_cell_15_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -445,10 +600,14 @@ views:
                     icon: none
                     name: Cell 8 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_8
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 8 R
                     entity: sensor.jk_bms_pack_1_cell_8_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -456,10 +615,17 @@ views:
                     icon: none
                     name: Cell 16 V
                     entity: sensor.jk_bms_pack_1_cell_voltage_16
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 16 R
                     entity: sensor.jk_bms_pack_1_cell_16_wire_resistance
+                    tap_action:
+                      action: more-info
+            grid_options:
+              columns: 9
+              rows: auto
           - type: heading
             heading_style: subtitle
             heading: Control
@@ -489,6 +655,11 @@ views:
               - min
             hide_legend: true
             logarithmic_scale: false
+          - type: grid
+            cards: []
+            grid_options:
+              columns: 3
+              rows: auto
       - type: grid
         cards:
           - type: heading
@@ -503,29 +674,39 @@ views:
                 icon: mdi:battery-plus-variant
                 name: Total Capacity
                 color: teal
+                tap_action:
+                  action: more-info
               - type: entity
                 show_state: true
                 show_icon: true
                 entity: sensor.jk_bms_pack_2_total_runtime_formatted
                 icon: mdi:battery-clock
                 color: indigo
+                tap_action:
+                  action: more-info
               - type: entity
                 show_state: true
                 show_icon: true
                 entity: sensor.jk_bms_pack_2_charging_cycles
                 icon: mdi:unicycle
                 color: deep-purple
+                tap_action:
+                  action: more-info
               - type: entity
                 show_state: true
                 show_icon: true
-                entity: sensor.jk_bms_pack_2_actual_battery_capacity
-                color: green
+                entity: sensor.pack_2_capacity_kwh
+                color: teal
+                tap_action:
+                  action: more-info
               - type: entity
                 show_state: true
                 show_icon: true
                 entity: sensor.jk_bms_pack_2_capacity_remaining_derived
                 icon: mdi:battery-arrow-down
                 color: accent
+                tap_action:
+                  action: more-info
             grid_options:
               columns: 12
               rows: 1
@@ -533,7 +714,6 @@ views:
             graph: line
             detail: 2
             name: SOC
-            icon: mdi:battery
             entity: sensor.jk_bms_pack_2_state_of_charge
           - graph: line
             type: sensor
@@ -560,14 +740,24 @@ views:
             badges:
               - type: entity
                 entity: sensor.jk_bms_pack_2_temperature_sensor_1
+                tap_action:
+                  action: more-info
               - type: entity
                 entity: sensor.jk_bms_pack_2_temperature_sensor_2
+                tap_action:
+                  action: more-info
               - type: entity
                 entity: sensor.jk_bms_pack_2_temperature_sensor_3
+                tap_action:
+                  action: more-info
               - type: entity
                 entity: sensor.jk_bms_pack_2_temperature_sensor_4
+                tap_action:
+                  action: more-info
               - type: entity
                 entity: sensor.jk_bms_pack_2_temperature_sensor_5
+                tap_action:
+                  action: more-info
           - type: heading
             icon: mdi:chip
             heading: Mosfet
@@ -577,6 +767,8 @@ views:
                 show_state: true
                 show_icon: true
                 entity: sensor.jk_bms_pack_2_mosfet_temperature
+                tap_action:
+                  action: more-info
           - type: heading
             icon: mdi:alarm-light-outline
             heading: Alarm
@@ -587,9 +779,35 @@ views:
                 show_icon: true
                 entity: sensor.jk_bms_pack_2_alarms
                 icon: none
+                tap_action:
+                  action: more-info
             grid_options:
               columns: full
               rows: auto
+          - square: false
+            type: grid
+            cards:
+              - type: heading
+                heading_style: subtitle
+                badges: []
+                grid_options:
+                  columns: 1
+                heading: Delta cell volt.
+              - type: heading
+                heading_style: subtitle
+                badges:
+                  - type: entity
+                    show_state: true
+                    show_icon: false
+                    entity: sensor.jk_bms_pack_2_delta_cell_voltage
+                    tap_action:
+                      action: more-info
+                grid_options:
+                  columns: 1
+            grid_options:
+              columns: 3
+              rows: auto
+            columns: 1
           - square: false
             type: grid
             columns: 2
@@ -603,10 +821,14 @@ views:
                     name: Cell 1 V
                     icon: none
                     entity: sensor.jk_bms_pack_2_cell_voltage_1
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 1 R
                     entity: sensor.jk_bms_pack_2_cell_1_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -614,10 +836,14 @@ views:
                     icon: none
                     name: Cell 9 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_9
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 9 R
                     entity: sensor.jk_bms_pack_2_cell_9_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -625,10 +851,14 @@ views:
                     icon: none
                     name: Cell 2 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_2
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 2 R
                     entity: sensor.jk_bms_pack_2_cell_2_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -636,10 +866,14 @@ views:
                     icon: none
                     name: Cell 10 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_10
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 10 R
                     entity: sensor.jk_bms_pack_2_cell_10_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -647,10 +881,14 @@ views:
                     icon: none
                     name: Cell 3 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_3
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 3 R
                     entity: sensor.jk_bms_pack_2_cell_3_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -658,10 +896,14 @@ views:
                     icon: none
                     name: Cell 11 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_11
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 11 R
                     entity: sensor.jk_bms_pack_2_cell_11_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -669,10 +911,14 @@ views:
                     icon: none
                     name: Cell 4 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_4
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 4 R
                     entity: sensor.jk_bms_pack_2_cell_4_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -680,10 +926,14 @@ views:
                     icon: none
                     name: Cell 12 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_12
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 12 R
                     entity: sensor.jk_bms_pack_2_cell_12_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -691,10 +941,14 @@ views:
                     icon: none
                     name: Cell 5 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_5
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 5 R
                     entity: sensor.jk_bms_pack_2_cell_5_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -702,10 +956,14 @@ views:
                     icon: none
                     name: Cell 13 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_13
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 13 R
                     entity: sensor.jk_bms_pack_2_cell_13_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -713,10 +971,14 @@ views:
                     icon: none
                     name: Cell 6 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_6
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 6 R
                     entity: sensor.jk_bms_pack_2_cell_6_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -724,10 +986,14 @@ views:
                     icon: none
                     name: Cell 14 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_14
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 14 R
                     entity: sensor.jk_bms_pack_2_cell_14_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -735,10 +1001,14 @@ views:
                     icon: none
                     name: Cell 7 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_7
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 7 R
                     entity: sensor.jk_bms_pack_2_cell_7_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -746,10 +1016,14 @@ views:
                     icon: none
                     name: Cell 15 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_15
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 15 R
                     entity: sensor.jk_bms_pack_2_cell_15_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -757,10 +1031,14 @@ views:
                     icon: none
                     name: Cell 8 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_8
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 8 R
                     entity: sensor.jk_bms_pack_2_cell_8_wire_resistance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading_style: subtitle
                 badges:
@@ -768,10 +1046,17 @@ views:
                     icon: none
                     name: Cell 16 V
                     entity: sensor.jk_bms_pack_2_cell_voltage_16
+                    tap_action:
+                      action: more-info
                   - type: entity
                     icon: none
                     name: Cell 16 R
                     entity: sensor.jk_bms_pack_2_cell_16_wire_resistance
+                    tap_action:
+                      action: more-info
+            grid_options:
+              columns: 9
+              rows: auto
           - type: heading
             heading: 'Control '
             heading_style: subtitle
@@ -814,10 +1099,26 @@ views:
                 icon: mdi:fridge
                 heading: Battery 1
                 heading_style: subtitle
+                badges:
+                  - type: entity
+                    show_state: true
+                    show_icon: true
+                    entity: sensor.jk_bms_pack_1_actual_battery_capacity
+                    color: green
+                    tap_action:
+                      action: more-info
               - type: heading
                 icon: mdi:fridge
                 heading: Battery 2
                 heading_style: subtitle
+                badges:
+                  - type: entity
+                    show_state: true
+                    show_icon: true
+                    entity: sensor.jk_bms_pack_2_actual_battery_capacity
+                    color: green
+                    tap_action:
+                      action: more-info
             columns: 2
           - square: false
             type: grid
@@ -831,6 +1132,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_start_balance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Start Balance Volt.
                 heading_style: subtitle
@@ -839,6 +1142,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_start_balance
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Max Balance Cur.
                 heading_style: subtitle
@@ -847,6 +1152,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_max_balance_current
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Max Balance Cur.
                 heading_style: subtitle
@@ -855,6 +1162,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_max_balance_current
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Cell OVP
                 heading_style: subtitle
@@ -863,6 +1172,8 @@ views:
                     entity: sensor.jk_bms_pack_1_cell_ovp
                     show_state: true
                     show_icon: true
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Cell OVP
                 heading_style: subtitle
@@ -871,6 +1182,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_cell_ovp
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Vol. Cell RCV
                 heading_style: subtitle
@@ -879,6 +1192,8 @@ views:
                     entity: sensor.jk_bms_pack_1_cell_rcv
                     show_state: true
                     show_icon: true
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Vol. Cell RCV
                 heading_style: subtitle
@@ -887,6 +1202,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_cell_rcv
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: SOC-100% Volt.
                 heading_style: subtitle
@@ -895,6 +1212,8 @@ views:
                     entity: sensor.jk_bms_pack_1_soc_100
                     show_state: true
                     show_icon: true
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: SOC-100% Volt.
                 heading_style: subtitle
@@ -903,6 +1222,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_soc_100
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Cell OVPR
                 heading_style: subtitle
@@ -911,6 +1232,8 @@ views:
                     entity: sensor.jk_bms_pack_1_cell_ovpr
                     show_state: true
                     show_icon: true
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Cell OVPR
                 heading_style: subtitle
@@ -919,6 +1242,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_cell_ovpr
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Cell UVPR
                 heading_style: subtitle
@@ -927,6 +1252,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_cell_uvpr
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Cell UVPR
                 heading_style: subtitle
@@ -935,6 +1262,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_cell_uvpr
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: SOC-0% Volt.
                 heading_style: subtitle
@@ -943,6 +1272,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_soc_0
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: SOC-0% Volt.
                 heading_style: subtitle
@@ -951,6 +1282,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_soc_0
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Cell UVP
                 heading_style: subtitle
@@ -959,6 +1292,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_cell_uvp
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Cell UVP
                 heading_style: subtitle
@@ -967,6 +1302,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_cell_uvp
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Power Off Vol.
                 heading_style: subtitle
@@ -975,6 +1312,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_system_power_off
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Power Off Vol.
                 heading_style: subtitle
@@ -983,6 +1322,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_system_power_off
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Vol. Cell RFV
                 heading_style: subtitle
@@ -991,6 +1332,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_cell_rfv
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Vol. Cell RFV
                 heading_style: subtitle
@@ -999,6 +1342,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_cell_rfv
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Vol. Smart Sleep
                 heading_style: subtitle
@@ -1007,6 +1352,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_smart_sleep
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Vol. Smart Sleep
                 heading_style: subtitle
@@ -1015,6 +1362,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_smart_sleep
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Continued Ch. Curr.
                 heading_style: subtitle
@@ -1023,38 +1372,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_continued_charge_current
-              - type: heading
-                heading: Charge OCP Delays
-                heading_style: subtitle
-                badges:
-                  - type: entity
-                    show_state: true
-                    show_icon: true
-                    entity: sensor.jk_bms_pack_1_charge_ocp_delay
-              - type: heading
-                heading: Charge OCP Delays
-                heading_style: subtitle
-                badges:
-                  - type: entity
-                    show_state: true
-                    show_icon: true
-                    entity: sensor.jk_bms_pack_2_charge_ocp_delay
-              - type: heading
-                heading: Charge OCPR Time
-                heading_style: subtitle
-                badges:
-                  - type: entity
-                    show_state: true
-                    show_icon: true
-                    entity: sensor.jk_bms_pack_1_charge_ocpr_time
-              - type: heading
-                heading: Charge OCPR Time
-                heading_style: subtitle
-                badges:
-                  - type: entity
-                    show_state: true
-                    show_icon: true
-                    entity: sensor.jk_bms_pack_2_charge_ocpr_time
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Continued Ch. Curr.
                 heading_style: subtitle
@@ -1063,6 +1382,48 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_continued_charge_current
+                    tap_action:
+                      action: more-info
+              - type: heading
+                heading: Charge OCP Delays
+                heading_style: subtitle
+                badges:
+                  - type: entity
+                    show_state: true
+                    show_icon: true
+                    entity: sensor.jk_bms_pack_1_charge_ocp_delay
+                    tap_action:
+                      action: more-info
+              - type: heading
+                heading: Charge OCP Delays
+                heading_style: subtitle
+                badges:
+                  - type: entity
+                    show_state: true
+                    show_icon: true
+                    entity: sensor.jk_bms_pack_2_charge_ocp_delay
+                    tap_action:
+                      action: more-info
+              - type: heading
+                heading: Charge OCPR Time
+                heading_style: subtitle
+                badges:
+                  - type: entity
+                    show_state: true
+                    show_icon: true
+                    entity: sensor.jk_bms_pack_1_charge_ocpr_time
+                    tap_action:
+                      action: more-info
+              - type: heading
+                heading: Charge OCPR Time
+                heading_style: subtitle
+                badges:
+                  - type: entity
+                    show_state: true
+                    show_icon: true
+                    entity: sensor.jk_bms_pack_2_charge_ocpr_time
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Discharge OTP
                 heading_style: subtitle
@@ -1071,6 +1432,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_discharge_otp
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Discharge OTP
                 heading_style: subtitle
@@ -1079,6 +1442,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_discharge_otp
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Discharge OTPR
                 heading_style: subtitle
@@ -1087,6 +1452,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_discharge_otpr
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Discharge OTPR
                 heading_style: subtitle
@@ -1095,6 +1462,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_discharge_otpr
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Charge OTP
                 heading_style: subtitle
@@ -1103,6 +1472,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_charge_otp
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Charge OTP
                 heading_style: subtitle
@@ -1111,6 +1482,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_charge_otp
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Charge OTPR
                 heading_style: subtitle
@@ -1119,6 +1492,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_charge_otpr
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Charge OTPR
                 heading_style: subtitle
@@ -1127,6 +1502,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_charge_otpr
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Charge UTPR
                 heading_style: subtitle
@@ -1135,6 +1512,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_charge_utpr
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Charge UTPR
                 heading_style: subtitle
@@ -1143,6 +1522,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_charge_utpr
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Charge UTP
                 heading_style: subtitle
@@ -1151,6 +1532,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_charge_utp
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Charge UTP
                 heading_style: subtitle
@@ -1159,6 +1542,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_charge_utp
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: TMP Stop Heating
                 heading_style: subtitle
@@ -1195,6 +1580,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_mos_otp
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: MOS OTP
                 heading_style: subtitle
@@ -1203,6 +1590,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_mos_otp
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: MOS OTPR
                 heading_style: subtitle
@@ -1211,6 +1600,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_mos_otpr
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: MOS OTPR
                 heading_style: subtitle
@@ -1219,6 +1610,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_mos_otpr
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: SCP Delay
                 heading_style: subtitle
@@ -1227,6 +1620,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_scp_delay
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: SCP Delay
                 heading_style: subtitle
@@ -1235,6 +1630,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_scp_delay
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: SCPR Time
                 heading_style: subtitle
@@ -1243,6 +1640,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_scpr_time
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: SCPR Time
                 heading_style: subtitle
@@ -1251,6 +1650,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_scpr_time
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: Device Addr
                 heading_style: subtitle
@@ -1287,6 +1688,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_rcv_time
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: RCV Time
                 heading_style: subtitle
@@ -1295,6 +1698,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_rcv_time
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: RFV Time
                 heading_style: subtitle
@@ -1303,6 +1708,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_1_rfv_time
+                    tap_action:
+                      action: more-info
               - type: heading
                 heading: RFV Time
                 heading_style: subtitle
@@ -1311,6 +1718,8 @@ views:
                     show_state: true
                     show_icon: true
                     entity: sensor.jk_bms_pack_2_rfv_time
+                    tap_action:
+                      action: more-info
           - type: custom:auto-entities
             card:
               show_name: true
@@ -1331,17 +1740,23 @@ views:
         show_state: true
         show_icon: true
         entity: sensor.growatt_dc_dc_temperature
+        tap_action:
+          action: more-info
       - type: entity
         show_name: true
         show_state: true
         show_icon: true
         entity: sensor.growatt_dc_bus_voltage
         show_entity_picture: false
+        tap_action:
+          action: more-info
       - type: entity
         show_name: true
         show_state: true
         show_icon: true
         entity: sensor.growatt_discharge_energy_today
+        tap_action:
+          action: more-info
       - type: entity
         show_name: true
         show_state: true
@@ -1349,11 +1764,15 @@ views:
         entity: sensor.growatt_pv_energy_total
         show_entity_picture: false
         state_content: state
+        tap_action:
+          action: more-info
       - type: entity
         show_name: true
         show_state: true
         show_icon: true
         entity: sensor.growatt_ac_charge_energy_total
+        tap_action:
+          action: more-info
     header:
       layout: responsive
       badges_position: bottom
