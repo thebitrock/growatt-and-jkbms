@@ -97,7 +97,7 @@ binary_sensor:
     modbus_controller_id: bms1
     id: bms1_charge_float_mode
     name: "${pack1_name} charging float mode"
-    address: 4372
+    address: 4372  # 0x1114
     register_type: holding
     bitmask: 0x0200
 
@@ -124,7 +124,7 @@ binary_sensor:
     modbus_controller_id: bms2
     id: bms2_charge_float_mode
     name: "${pack2_name} charging float mode"
-    address: 4372
+    address: 4372  # 0x1114
     register_type: holding
     bitmask: 0x0200
 
@@ -135,7 +135,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_smart_sleep
     name: "${pack1_name} smart sleep"
-    address: 4096
+    address: 4096  # 0x1000
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -153,7 +153,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_uvp
     name: "${pack1_name} cell UVP"
-    address: 4100
+    address: 4100  # 0x1004
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -171,7 +171,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_uvpr
     name: "${pack1_name} cell UVPR"
-    address: 4104
+    address: 4104  # 0x1008
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -189,7 +189,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_ovp
     name: "${pack1_name} cell OVP"
-    address: 4108
+    address: 4108  # 0x100C
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -207,7 +207,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_ovpr
     name: "${pack1_name} cell OVPR"
-    address: 4112
+    address: 4112  # 0x1010
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -225,7 +225,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_start_balance_trigger
     name: "${pack1_name} start balance trigger"
-    address: 4116
+    address: 4116  # 0x1014
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -243,7 +243,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_soc_100
     name: "${pack1_name} sOC-100%"
-    address: 4120
+    address: 4120  # 0x1018
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -261,7 +261,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_soc_0
     name: "${pack1_name} sOC-0%"
-    address: 4124
+    address: 4124  # 0x101C
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -279,7 +279,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_rcv
     name: "${pack1_name} cell RCV"
-    address: 4128
+    address: 4128  # 0x1020
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -297,7 +297,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_rfv
     name: "${pack1_name} cell RFV"
-    address: 4132
+    address: 4132  # 0x1024
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -315,7 +315,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_system_power_off
     name: "${pack1_name} system power off"
-    address: 4136
+    address: 4136  # 0x1028
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -333,7 +333,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_continued_charge_current
     name: "${pack1_name} continued charge current"
-    address: 4140
+    address: 4140  # 0x102C
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -351,7 +351,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_charge_ocp_delay
     name: "${pack1_name} charge OCP delay"
-    address: 4144
+    address: 4144  # 0x1030
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -367,7 +367,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_charge_ocpr_time
     name: "${pack1_name} charge OCPR time"
-    address: 4148
+    address: 4148  # 0x1034
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -383,7 +383,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_continued_discharge_current
     name: "${pack1_name} continued discharge current"
-    address: 4152
+    address: 4152  # 0x1038
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -401,7 +401,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_discharge_ocp_delay
     name: "${pack1_name} discharge OCP delay"
-    address: 4156
+    address: 4156  # 0x103C
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -417,7 +417,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_discharge_ocpr_time
     name: "${pack1_name} discharge OCPR time"
-    address: 4160
+    address: 4160  # 0x1040
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -433,7 +433,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_scpr_time
     name: "${pack1_name} sCPR time"
-    address: 4164
+    address: 4164  # 0x1044
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -449,7 +449,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_max_balance_current
     name: "${pack1_name} max balance current"
-    address: 4168
+    address: 4168  # 0x1048
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -467,7 +467,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_charge_otp
     name: "${pack1_name} charge OTP"
-    address: 4172
+    address: 4172  # 0x104C
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -485,7 +485,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_charge_otpr
     name: "${pack1_name} charge OTPR"
-    address: 4176
+    address: 4176  # 0x1050
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -503,7 +503,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_discharge_otp
     name: "${pack1_name} discharge OTP"
-    address: 4180
+    address: 4180  # 0x1054
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -521,7 +521,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_discharge_otpr
     name: "${pack1_name} discharge OTPR"
-    address: 4184
+    address: 4184  # 0x1058
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -539,7 +539,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_charge_utp
     name: "${pack1_name} charge UTP"
-    address: 4188
+    address: 4188  # 0x105C
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -557,7 +557,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_charge_utpr
     name: "${pack1_name} charge UTPR"
-    address: 4192
+    address: 4192  # 0x1060
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -575,7 +575,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_mos_otp
     name: "${pack1_name} mOS OTP"
-    address: 4196
+    address: 4196  # 0x1064
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -593,7 +593,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_mos_otpr
     name: "${pack1_name} mOS OTPR"
-    address: 4200
+    address: 4200  # 0x1068
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -611,7 +611,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_count
     name: "${pack1_name} cell count"
-    address: 4204
+    address: 4204  # 0x106C
     register_type: holding
     value_type: U_DWORD
     register_count: 8
@@ -624,14 +624,14 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_bat_capacity
     name: "${pack1_name} battery capacity"
-    address: 4220
+    address: 4220  # 0x107C
     register_type: holding
     value_type: U_DWORD
     register_count: 4
     response_size: 4
     skip_updates: ${bms_control_params_skip_updates}
     unit_of_measurement: Ah
-    device_class: energy_storage
+    # device_class: energy_storage
     state_class: measurement
     accuracy_decimals: 0
     filters:
@@ -642,7 +642,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_scp_delay
     name: "${pack1_name} sCP delay"
-    address: 4224
+    address: 4224  # 0x1080
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -658,7 +658,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_start_balance
     name: "${pack1_name} start balance"
-    address: 4228
+    address: 4228  # 0x1084
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -678,7 +678,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_1
     name: "${pack1_name} cell voltage 1"
-    address: 4608
+    address: 4608  # 0x1200
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -695,7 +695,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_2
     name: "${pack1_name} cell voltage 2"
-    address: 4610
+    address: 4610  # 0x1202
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -712,7 +712,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_3
     name: "${pack1_name} cell voltage 3"
-    address: 4612
+    address: 4612  # 0x1204
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -729,7 +729,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_4
     name: "${pack1_name} cell voltage 4"
-    address: 4614
+    address: 4614  # 0x1206
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -746,7 +746,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_5
     name: "${pack1_name} cell voltage 5"
-    address: 4616
+    address: 4616  # 0x1208
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -763,7 +763,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_6
     name: "${pack1_name} cell voltage 6"
-    address: 4618
+    address: 4618  # 0x120A
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -780,7 +780,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_7
     name: "${pack1_name} cell voltage 7"
-    address: 4620
+    address: 4620  # 0x120C
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -797,7 +797,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_8
     name: "${pack1_name} cell voltage 8"
-    address: 4622
+    address: 4622  # 0x120E
     register_type: holding
     value_type: U_WORD
     register_count: 2      # 56  Change to this value if you have 8 cells, otherwise set to 2
@@ -817,7 +817,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_9
     name: "${pack1_name} cell voltage 9"
-    address: 4624
+    address: 4624  # 0x1210
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -834,7 +834,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_10
     name: "${pack1_name} cell voltage 10"
-    address: 4626
+    address: 4626  # 0x1212
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -851,7 +851,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_11
     name: "${pack1_name} cell voltage 11"
-    address: 4628
+    address: 4628  # 0x1214
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -868,7 +868,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_12
     name: "${pack1_name} cell voltage 12"
-    address: 4630
+    address: 4630  # 0x1216
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -885,7 +885,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_13
     name: "${pack1_name} cell voltage 13"
-    address: 4632
+    address: 4632  # 0x1218
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -902,7 +902,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_14
     name: "${pack1_name} cell voltage 14"
-    address: 4634
+    address: 4634  # 0x121A
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -919,7 +919,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_15
     name: "${pack1_name} cell voltage 15"
-    address: 4636
+    address: 4636  # 0x121C
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -936,7 +936,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_v_16
     name: "${pack1_name} cell voltage 16"
-    address: 4638
+    address: 4638  # 0x121E
     register_type: holding
     value_type: U_WORD
     register_count: 40
@@ -955,7 +955,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_delta_cell_voltage
     name: "${pack1_name} delta cell voltage"
-    address: 4678
+    address: 4678  # 0x1246
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -972,7 +972,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_max_volt_cell_number
     name: "${pack1_name} max voltage cell number"
-    address: 4680
+    address: 4680  # 0x1248
     register_type: holding
     value_type: U_WORD
     register_count: 44
@@ -988,7 +988,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_min_volt_cell_number
     name: "${pack1_name} min voltage cell number"
-    address: 4680
+    address: 4680  # 0x1248
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1010,7 +1010,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_1_wire_resistance
     name: "${pack1_name} cell 1 wire resistance"
-    address: 4682
+    address: 4682  # 0x124A
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1026,7 +1026,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_2_wire_resistance
     name: "${pack1_name} cell 2 wire resistance"
-    address: 4684
+    address: 4684  # 0x124C
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1042,7 +1042,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_3_wire_resistance
     name: "${pack1_name} cell 3 wire resistance"
-    address: 4686
+    address: 4686  # 0x124E
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1058,7 +1058,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_4_wire_resistance
     name: "${pack1_name} cell 4 wire resistance"
-    address: 4688
+    address: 4688  # 0x1250
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1074,7 +1074,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_5_wire_resistance
     name: "${pack1_name} cell 5 wire resistance"
-    address: 4690
+    address: 4690  # 0x1252
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1090,7 +1090,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_6_wire_resistance
     name: "${pack1_name} cell 6 wire resistance"
-    address: 4692
+    address: 4692  # 0x1254
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1106,7 +1106,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_7_wire_resistance
     name: "${pack1_name} cell 7 wire resistance"
-    address: 4694
+    address: 4694  # 0x1256
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1122,7 +1122,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_8_wire_resistance
     name: "${pack1_name} cell 8 wire resistance"
-    address: 4696
+    address: 4696  # 0x1258
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1138,7 +1138,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_9_wire_resistance
     name: "${pack1_name} cell 9 wire resistance"
-    address: 4698
+    address: 4698  # 0x125A
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1154,7 +1154,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_10_wire_resistance
     name: "${pack1_name} cell 10 wire resistance"
-    address: 4700
+    address: 4700  # 0x125C
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1170,7 +1170,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_11_wire_resistance
     name: "${pack1_name} cell 11 wire resistance"
-    address: 4702
+    address: 4702  # 0x125E
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1186,7 +1186,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_12_wire_resistance
     name: "${pack1_name} cell 12 wire resistance"
-    address: 4704
+    address: 4704  # 0x1260
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1202,7 +1202,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_13_wire_resistance
     name: "${pack1_name} cell 13 wire resistance"
-    address: 4706
+    address: 4706  # 0x1262
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1218,7 +1218,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_14_wire_resistance
     name: "${pack1_name} cell 14 wire resistance"
-    address: 4708
+    address: 4708  # 0x1264
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1234,7 +1234,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_15_wire_resistance
     name: "${pack1_name} cell 15 wire resistance"
-    address: 4710
+    address: 4710  # 0x1266
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1250,7 +1250,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cell_16_wire_resistance
     name: "${pack1_name} cell 16 wire resistance"
-    address: 4712
+    address: 4712  # 0x1268
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1267,7 +1267,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_mosfet_temperature
     name: "${pack1_name} mosfet temperature"
-    address: 4746
+    address: 4746  # 0x128A
     register_type: holding
     value_type: S_WORD
     register_count: 6
@@ -1285,7 +1285,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_total_voltage
     name: "${pack1_name} total voltage"
-    address: 4752
+    address: 4752  # 0x1290
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -1302,7 +1302,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_power
     name: "${pack1_name} power"
-    address: 4756
+    address: 4756  # 0x1294
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -1322,7 +1322,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_charge_power
     name: "${pack1_name} charging power"
-    address: 4760
+    address: 4760  # 0x1298
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -1343,7 +1343,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_discharge_power
     name: "${pack1_name} discharging power"
-    address: 4760
+    address: 4760  # 0x1298
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -1365,7 +1365,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_current
     name: "${pack1_name} current"
-    address: 4760
+    address: 4760  # 0x1298
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -1381,7 +1381,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_charge_current
     name: "${pack1_name} charging current"
-    address: 4760
+    address: 4760  # 0x1298
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -1402,7 +1402,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_discharge_current
     name: "${pack1_name} discharging current"
-    address: 4760
+    address: 4760  # 0x1298
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -1424,7 +1424,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_temp_sens_1
     name: "${pack1_name} temperature sensor 1"
-    address: 4764
+    address: 4764  # 0x129C
     register_type: holding
     value_type: S_WORD
     register_count: 2
@@ -1441,7 +1441,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_temp_sens_2
     name: "${pack1_name} temperature sensor 2"
-    address: 4766
+    address: 4766  # 0x129E
     register_type: holding
     value_type: S_WORD
     register_count: 2
@@ -1458,7 +1458,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_alarms_bitmask
     name: "${pack1_name} alarms bitmask"
-    address: 4768
+    address: 4768  # 0x12A0
     register_type: holding
     value_type: U_DWORD
     register_count: 2
@@ -1472,7 +1472,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_balance_current
     name: "${pack1_name} balance current"
-    address: 4772
+    address: 4772  # 0x12A4
     register_type: holding
     value_type: S_WORD
     register_count: 2
@@ -1489,7 +1489,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_state_of_charge
     name: "${pack1_name} state of charge"
-    address: 4774
+    address: 4774  # 0x12A6
     register_type: holding
     value_type: U_WORD
     state_class: measurement
@@ -1501,7 +1501,7 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: bms1
     id: bms1_balancing_raw
-    address: 4774
+    address: 4774  # 0x12A6
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1514,7 +1514,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_cap_rem_derived
     name: "${pack1_name} capacity remaining derived"
-    address: 4776
+    address: 4776  # 0x12A8
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -1531,13 +1531,12 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_actual_bat_capacity
     name: "${pack1_name} actual battery capacity"
-    address: 4780
+    address: 4780  # 0x12AC
     register_type: holding
     value_type: U_DWORD
     register_count: 4
     response_size: 4
     state_class: measurement
-    device_class: energy_storage
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
     filters:
@@ -1548,7 +1547,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_charge_cycles
     name: "${pack1_name} charging cycles"
-    address: 4784
+    address: 4784  # 0x12B0
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -1561,7 +1560,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_total_charge_cycle_capacity
     name: "${pack1_name} total charging cycle capacity"
-    address: 4788
+    address: 4788  # 0x12B4
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -1577,7 +1576,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_state_of_health
     name: "${pack1_name} state of health"
-    address: 4792
+    address: 4792  # 0x12B8
     register_type: holding
     value_type: U_WORD
     register_count: 4
@@ -1595,7 +1594,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_total_runtime
     name: "${pack1_name} total runtime in seconds"
-    address: 4796
+    address: 4796  # 0x12BC
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -1609,7 +1608,7 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: bms1
     id: bms1_charging_raw
-    address: 4800
+    address: 4800  # 0x12C0
     register_type: holding
     value_type: U_WORD
     register_count: 4
@@ -1620,7 +1619,7 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: bms1
     id: bms1_discharging_raw
-    address: 4800
+    address: 4800  # 0x12C0
     register_type: holding
     value_type: U_WORD
     register_count: 4
@@ -1645,7 +1644,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_disacharge_ocpr_left
     name: "${pack1_name} disacharge OCPR left"
-    address: 4804
+    address: 4804  # 0x12C4
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1660,7 +1659,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_disacharge_scpr_left
     name: "${pack1_name} disacharge SCPR left"
-    address: 4806
+    address: 4806  # 0x12C6
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1673,7 +1672,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_charge_ocpr_left
     name: "${pack1_name} charge OCPR left"
-    address: 4808
+    address: 4808  # 0x12C8
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1688,7 +1687,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_charge_scpr_left
     name: "${pack1_name} charge SCPR left"
-    address: 4810
+    address: 4810  # 0x12CA
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1703,7 +1702,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_uvpr_left
     name: "${pack1_name} uVPR left"
-    address: 4812
+    address: 4812  # 0x12CC
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1718,7 +1717,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_ovpr_left
     name: "${pack1_name} oVPR left"
-    address: 4814
+    address: 4814  # 0x12CE
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -1744,7 +1743,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_temp_sens_3
     name: "${pack1_name} temperature sensor 3"
-    address: 4856
+    address: 4856  # 0x12F8
     register_type: holding
     value_type: S_WORD
     register_count: 2
@@ -1761,7 +1760,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_temp_sens_4
     name: "${pack1_name} temperature sensor 4"
-    address: 4858
+    address: 4858  # 0x12FA
     register_type: holding
     value_type: S_WORD
     register_count: 2
@@ -1778,7 +1777,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_jkbms_bat_temp4
     name: "${pack1_name} temperature sensor 5"
-    address: 4860
+    address: 4860  # 0x12FC
     register_type: holding
     value_type: S_WORD
     register_count: 2
@@ -1797,7 +1796,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_rcv_time
     name: "${pack1_name} rCV Time"
-    address: 5380
+    address: 5380  # 0x1504
     register_type: holding
     value_type: U_WORD
     register_count: 1
@@ -1814,7 +1813,7 @@ sensor:
     modbus_controller_id: bms1
     id: bms1_rfv_time
     name: "${pack1_name} rFV Time"
-    address: 5380
+    address: 5380  # 0x1504
     register_type: holding
     value_type: U_WORD
     register_count: 1
@@ -1833,7 +1832,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_smart_sleep
     name: "${pack2_name} smart sleep"
-    address: 4096
+    address: 4096  # 0x1000
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -1851,7 +1850,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_uvp
     name: "${pack2_name} cell UVP"
-    address: 4100
+    address: 4100  # 0x1004
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -1869,7 +1868,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_uvpr
     name: "${pack2_name} cell UVPR"
-    address: 4104
+    address: 4104  # 0x1008
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -1887,7 +1886,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_ovp
     name: "${pack2_name} cell OVP"
-    address: 4108
+    address: 4108  # 0x100C
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -1905,7 +1904,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_ovpr
     name: "${pack2_name} cell OVPR"
-    address: 4112
+    address: 4112  # 0x1010
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -1923,7 +1922,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_start_balance_trigger
     name: "${pack2_name} start balance trigger"
-    address: 4116
+    address: 4116  # 0x1014
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -1941,7 +1940,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_soc_100
     name: "${pack2_name} sOC-100%"
-    address: 4120
+    address: 4120  # 0x1018
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -1959,7 +1958,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_soc_0
     name: "${pack2_name} sOC-0%"
-    address: 4124
+    address: 4124  # 0x101C
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -1977,7 +1976,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_rcv
     name: "${pack2_name} cell RCV"
-    address: 4128
+    address: 4128  # 0x1020
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -1995,7 +1994,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_rfv
     name: "${pack2_name} cell RFV"
-    address: 4132
+    address: 4132  # 0x1024
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -2013,7 +2012,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_system_power_off
     name: "${pack2_name} system power off"
-    address: 4136
+    address: 4136  # 0x1028
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -2031,7 +2030,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_continued_charge_current
     name: "${pack2_name} continued charge current"
-    address: 4140
+    address: 4140  # 0x102C
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -2049,7 +2048,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_charge_ocp_delay
     name: "${pack2_name} charge OCP delay"
-    address: 4144
+    address: 4144  # 0x1030
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -2065,7 +2064,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_charge_ocpr_time
     name: "${pack2_name} charge OCPR time"
-    address: 4148
+    address: 4148  # 0x1034
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -2081,7 +2080,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_continued_discharge_current
     name: "${pack2_name} continued discharge current"
-    address: 4152
+    address: 4152  # 0x1038
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -2099,7 +2098,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_discharge_ocp_delay
     name: "${pack2_name} discharge OCP delay"
-    address: 4156
+    address: 4156  # 0x103C
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -2115,7 +2114,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_discharge_ocpr_time
     name: "${pack2_name} discharge OCPR time"
-    address: 4160
+    address: 4160  # 0x1040
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -2131,7 +2130,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_scpr_time
     name: "${pack2_name} sCPR time"
-    address: 4164
+    address: 4164  # 0x1044
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -2147,7 +2146,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_max_balance_current
     name: "${pack2_name} max balance current"
-    address: 4168
+    address: 4168  # 0x1048
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -2165,7 +2164,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_charge_otp
     name: "${pack2_name} charge OTP"
-    address: 4172
+    address: 4172  # 0x104C
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -2183,7 +2182,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_charge_otpr
     name: "${pack2_name} charge OTPR"
-    address: 4176
+    address: 4176  # 0x1050
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -2201,7 +2200,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_discharge_otp
     name: "${pack2_name} discharge OTP"
-    address: 4180
+    address: 4180  # 0x1054
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -2219,7 +2218,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_discharge_otpr
     name: "${pack2_name} discharge OTPR"
-    address: 4184
+    address: 4184  # 0x1058
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -2237,7 +2236,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_charge_utp
     name: "${pack2_name} charge UTP"
-    address: 4188
+    address: 4188  # 0x105C
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -2255,7 +2254,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_charge_utpr
     name: "${pack2_name} charge UTPR"
-    address: 4192
+    address: 4192  # 0x1060
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -2273,7 +2272,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_mos_otp
     name: "${pack2_name} mOS OTP"
-    address: 4196
+    address: 4196  # 0x1064
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -2291,7 +2290,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_mos_otpr
     name: "${pack2_name} mOS OTPR"
-    address: 4200
+    address: 4200  # 0x1068
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -2309,7 +2308,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_count
     name: "${pack2_name} cell count"
-    address: 4204
+    address: 4204  # 0x106C
     register_type: holding
     value_type: U_DWORD
     register_count: 8
@@ -2322,7 +2321,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_bat_capacity
     name: "${pack2_name} battery capacity"
-    address: 4220
+    address: 4220  # 0x107C
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -2340,7 +2339,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_scp_delay
     name: "${pack2_name} sCP delay"
-    address: 4224
+    address: 4224  # 0x1080
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -2356,7 +2355,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_start_balance
     name: "${pack2_name} start balance"
-    address: 4228
+    address: 4228  # 0x1084
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -2376,7 +2375,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_1
     name: "${pack2_name} cell voltage 1"
-    address: 4608
+    address: 4608  # 0x1200
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2393,7 +2392,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_2
     name: "${pack2_name} cell voltage 2"
-    address: 4610
+    address: 4610  # 0x1202
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2410,7 +2409,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_3
     name: "${pack2_name} cell voltage 3"
-    address: 4612
+    address: 4612  # 0x1204
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2427,7 +2426,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_4
     name: "${pack2_name} cell voltage 4"
-    address: 4614
+    address: 4614  # 0x1206
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2444,7 +2443,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_5
     name: "${pack2_name} cell voltage 5"
-    address: 4616
+    address: 4616  # 0x1208
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2461,7 +2460,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_6
     name: "${pack2_name} cell voltage 6"
-    address: 4618
+    address: 4618  # 0x120A
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2478,7 +2477,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_7
     name: "${pack2_name} cell voltage 7"
-    address: 4620
+    address: 4620  # 0x120C
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2495,7 +2494,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_8
     name: "${pack2_name} cell voltage 8"
-    address: 4622
+    address: 4622  # 0x120E
     register_type: holding
     value_type: U_WORD
     register_count: 2      # 56  Change to this value if you have 8 cells, otherwise set to 2
@@ -2515,7 +2514,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_9
     name: "${pack2_name} cell voltage 9"
-    address: 4624
+    address: 4624  # 0x1210
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2532,7 +2531,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_10
     name: "${pack2_name} cell voltage 10"
-    address: 4626
+    address: 4626  # 0x1212
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2549,7 +2548,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_11
     name: "${pack2_name} cell voltage 11"
-    address: 4628
+    address: 4628  # 0x1214
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2566,7 +2565,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_12
     name: "${pack2_name} cell voltage 12"
-    address: 4630
+    address: 4630  # 0x1216
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2583,7 +2582,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_13
     name: "${pack2_name} cell voltage 13"
-    address: 4632
+    address: 4632  # 0x1218
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2600,7 +2599,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_14
     name: "${pack2_name} cell voltage 14"
-    address: 4634
+    address: 4634  # 0x121A
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2617,7 +2616,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_15
     name: "${pack2_name} cell voltage 15"
-    address: 4636
+    address: 4636  # 0x121C
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2634,7 +2633,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_v_16
     name: "${pack2_name} cell voltage 16"
-    address: 4638
+    address: 4638  # 0x121E
     register_type: holding
     value_type: U_WORD
     register_count: 40
@@ -2653,7 +2652,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_delta_cell_voltage
     name: "${pack2_name} delta cell voltage"
-    address: 4678
+    address: 4678  # 0x1246
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2670,7 +2669,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_max_volt_cell_number
     name: "${pack2_name} max voltage cell number"
-    address: 4680
+    address: 4680  # 0x1248
     register_type: holding
     value_type: U_WORD
     register_count: 44
@@ -2686,7 +2685,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_min_volt_cell_number
     name: "${pack2_name} min voltage cell number"
-    address: 4680
+    address: 4680  # 0x1248
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2708,7 +2707,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_1_wire_resistance
     name: "${pack2_name} cell 1 wire resistance"
-    address: 4682
+    address: 4682  # 0x124A
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2724,7 +2723,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_2_wire_resistance
     name: "${pack2_name} cell 2 wire resistance"
-    address: 4684
+    address: 4684  # 0x124C
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2740,7 +2739,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_3_wire_resistance
     name: "${pack2_name} cell 3 wire resistance"
-    address: 4686
+    address: 4686  # 0x124E
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2756,7 +2755,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_4_wire_resistance
     name: "${pack2_name} cell 4 wire resistance"
-    address: 4688
+    address: 4688  # 0x1250
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2772,7 +2771,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_5_wire_resistance
     name: "${pack2_name} cell 5 wire resistance"
-    address: 4690
+    address: 4690  # 0x1252
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2788,7 +2787,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_6_wire_resistance
     name: "${pack2_name} cell 6 wire resistance"
-    address: 4692
+    address: 4692  # 0x1254
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2804,7 +2803,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_7_wire_resistance
     name: "${pack2_name} cell 7 wire resistance"
-    address: 4694
+    address: 4694  # 0x1256
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2820,7 +2819,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_8_wire_resistance
     name: "${pack2_name} cell 8 wire resistance"
-    address: 4696
+    address: 4696  # 0x1258
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2836,7 +2835,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_9_wire_resistance
     name: "${pack2_name} cell 9 wire resistance"
-    address: 4698
+    address: 4698  # 0x125A
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2852,7 +2851,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_10_wire_resistance
     name: "${pack2_name} cell 10 wire resistance"
-    address: 4700
+    address: 4700  # 0x125C
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2868,7 +2867,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_11_wire_resistance
     name: "${pack2_name} cell 11 wire resistance"
-    address: 4702
+    address: 4702  # 0x125E
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2884,7 +2883,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_12_wire_resistance
     name: "${pack2_name} cell 12 wire resistance"
-    address: 4704
+    address: 4704  # 0x1260
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2900,7 +2899,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_13_wire_resistance
     name: "${pack2_name} cell 13 wire resistance"
-    address: 4706
+    address: 4706  # 0x1262
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2916,7 +2915,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_14_wire_resistance
     name: "${pack2_name} cell 14 wire resistance"
-    address: 4708
+    address: 4708  # 0x1264
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2932,7 +2931,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_15_wire_resistance
     name: "${pack2_name} cell 15 wire resistance"
-    address: 4710
+    address: 4710  # 0x1266
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2948,7 +2947,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cell_16_wire_resistance
     name: "${pack2_name} cell 16 wire resistance"
-    address: 4712
+    address: 4712  # 0x1268
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -2965,7 +2964,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_mosfet_temperature
     name: "${pack2_name} mosfet temperature"
-    address: 4746
+    address: 4746  # 0x128A
     register_type: holding
     value_type: S_WORD
     register_count: 6
@@ -2983,7 +2982,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_total_voltage
     name: "${pack2_name} total voltage"
-    address: 4752
+    address: 4752  # 0x1290
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -3000,7 +2999,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_power
     name: "${pack2_name} power"
-    address: 4756
+    address: 4756  # 0x1294
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -3020,7 +3019,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_charge_power
     name: "${pack2_name} charging power"
-    address: 4760
+    address: 4760  # 0x1298
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -3041,7 +3040,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_discharge_power
     name: "${pack2_name} discharging power"
-    address: 4760
+    address: 4760  # 0x1298
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -3063,7 +3062,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_current
     name: "${pack2_name} current"
-    address: 4760
+    address: 4760  # 0x1298
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -3079,7 +3078,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_charge_current
     name: "${pack2_name} charging current"
-    address: 4760
+    address: 4760  # 0x1298
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -3100,7 +3099,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_discharge_current
     name: "${pack2_name} discharging current"
-    address: 4760
+    address: 4760  # 0x1298
     register_type: holding
     value_type: S_DWORD
     register_count: 4
@@ -3122,7 +3121,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_temp_sens_1
     name: "${pack2_name} temperature sensor 1"
-    address: 4764
+    address: 4764  # 0x129C
     register_type: holding
     value_type: S_WORD
     register_count: 2
@@ -3139,7 +3138,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_temp_sens_2
     name: "${pack2_name} temperature sensor 2"
-    address: 4766
+    address: 4766  # 0x129E
     register_type: holding
     value_type: S_WORD
     register_count: 2
@@ -3156,7 +3155,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_alarms_bitmask
     name: "${pack2_name} alarms bitmask"
-    address: 4768
+    address: 4768  # 0x12A0
     register_type: holding
     value_type: U_DWORD
     register_count: 2
@@ -3170,7 +3169,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_balance_current
     name: "${pack2_name} balance current"
-    address: 4772
+    address: 4772  # 0x12A4
     register_type: holding
     value_type: S_WORD
     register_count: 2
@@ -3187,7 +3186,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_state_of_charge
     name: "${pack2_name} state of charge"
-    address: 4774
+    address: 4774  # 0x12A6
     register_type: holding
     value_type: U_WORD
     state_class: measurement
@@ -3199,7 +3198,7 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: bms2
     id: bms2_balancing_raw
-    address: 4774
+    address: 4774  # 0x12A6
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -3212,7 +3211,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_cap_rem_derived
     name: "${pack2_name} capacity remaining derived"
-    address: 4776
+    address: 4776  # 0x12A8
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -3229,13 +3228,12 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_actual_bat_capacity
     name: "${pack2_name} actual battery capacity"
-    address: 4780
+    address: 4780  # 0x12AC
     register_type: holding
     value_type: U_DWORD
     register_count: 4
     response_size: 4
     state_class: measurement
-    device_class: energy_storage
     unit_of_measurement: "Ah"
     accuracy_decimals: 0
     filters:
@@ -3246,7 +3244,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_charge_cycles
     name: "${pack2_name} charging cycles"
-    address: 4784
+    address: 4784  # 0x12B0
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -3259,7 +3257,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_total_charge_cycle_capacity
     name: "${pack2_name} total charging cycle capacity"
-    address: 4788
+    address: 4788  # 0x12B4
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -3275,7 +3273,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_state_of_health
     name: "${pack2_name} state of health"
-    address: 4792
+    address: 4792  # 0x12B8
     register_type: holding
     value_type: U_WORD
     register_count: 4
@@ -3293,7 +3291,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_total_runtime
     name: "${pack2_name} total runtime in seconds"
-    address: 4796
+    address: 4796  # 0x12BC
     register_type: holding
     value_type: U_DWORD
     register_count: 4
@@ -3307,7 +3305,7 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: bms2
     id: bms2_charging_raw
-    address: 4800
+    address: 4800  # 0x12C0
     register_type: holding
     value_type: U_WORD
     register_count: 4
@@ -3318,7 +3316,7 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: bms2
     id: bms2_discharging_raw
-    address: 4800
+    address: 4800  # 0x12C0
     register_type: holding
     value_type: U_WORD
     register_count: 4
@@ -3343,7 +3341,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_disacharge_ocpr_left
     name: "${pack2_name} disacharge OCPR left"
-    address: 4804
+    address: 4804  # 0x12C4
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -3358,7 +3356,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_disacharge_scpr_left
     name: "${pack2_name} disacharge SCPR left"
-    address: 4806
+    address: 4806  # 0x12C6
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -3371,7 +3369,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_charge_ocpr_left
     name: "${pack2_name} charge OCPR left"
-    address: 4808
+    address: 4808  # 0x12C8
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -3386,7 +3384,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_charge_scpr_left
     name: "${pack2_name} charge SCPR left"
-    address: 4810
+    address: 4810  # 0x12CA
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -3401,7 +3399,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_uvpr_left
     name: "${pack2_name} uVPR left"
-    address: 4812
+    address: 4812  # 0x12CC
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -3416,7 +3414,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_ovpr_left
     name: "${pack2_name} oVPR left"
-    address: 4814
+    address: 4814  # 0x12CE
     register_type: holding
     value_type: U_WORD
     register_count: 2
@@ -3442,7 +3440,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_temp_sens_3
     name: "${pack2_name} temperature sensor 3"
-    address: 4856
+    address: 4856  # 0x12F8
     register_type: holding
     value_type: S_WORD
     register_count: 2
@@ -3459,7 +3457,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_temp_sens_4
     name: "${pack2_name} temperature sensor 4"
-    address: 4858
+    address: 4858  # 0x12FA
     register_type: holding
     value_type: S_WORD
     register_count: 2
@@ -3476,7 +3474,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_jkbms_bat_temp4
     name: "${pack2_name} temperature sensor 5"
-    address: 4860
+    address: 4860  # 0x12FC
     register_type: holding
     value_type: S_WORD
     register_count: 2
@@ -3495,7 +3493,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_rcv_time
     name: "${pack2_name} rCV Time"
-    address: 5380
+    address: 5380  # 0x1504
     register_type: holding
     value_type: U_WORD
     register_count: 1
@@ -3512,7 +3510,7 @@ sensor:
     modbus_controller_id: bms2
     id: bms2_rfv_time
     name: "${pack2_name} rFV Time"
-    address: 5380
+    address: 5380  # 0x1504
     register_type: holding
     value_type: U_WORD
     register_count: 1
@@ -3525,6 +3523,16 @@ sensor:
     filters:
       - multiply: 0.1
 
+  # - platform: modbus_controller
+  #   modbus_controller_id: bms2
+  #   id: bms2_lcd_buzzer_trigger_source
+  #   name: "${pack2_name} LCD buzzer trigger source"
+  #   address: 5348 # 0x14E4
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   skip_updates: ${bms_control_params_skip_updates}
+  #   bitmask: 0xFF00
+
 select:
   # Pack 1
   - platform: modbus_controller
@@ -3532,7 +3540,7 @@ select:
     id: bms1_charging_toggle
     name: "${pack1_name} charging"
     icon: "mdi:battery-charging-100"
-    address: 4208
+    address: 4208  # 0x1070
     value_type: U_DWORD
     skip_updates: 5
     optionsmap:
@@ -3544,7 +3552,7 @@ select:
     id: bms1_discharging_toggle
     name: "${pack1_name} discharging"
     icon: "mdi:power-plug-battery"
-    address: 4212
+    address: 4212  # 0x1074
     value_type: U_DWORD
     skip_updates: 5
     optionsmap:
@@ -3556,7 +3564,7 @@ select:
     id: bms1_balancing_toggle
     name: "${pack1_name} balancing"
     icon: mdi:scale-balance
-    address: 4216
+    address: 4216  # 0x1078
     value_type: U_DWORD
     skip_updates: 5
     optionsmap:
@@ -3568,7 +3576,7 @@ select:
     id: bms2_charging_toggle
     name: "${pack2_name} charging"
     icon: "mdi:battery-charging-100"
-    address: 4208
+    address: 4208  # 0x1070
     value_type: U_DWORD
     skip_updates: 5
     optionsmap:
@@ -3580,7 +3588,7 @@ select:
     id: bms2_discharging_toggle
     name: "${pack2_name} discharging"
     icon: "mdi:power-plug-battery"
-    address: 4212
+    address: 4212  # 0x1074
     value_type: U_DWORD
     skip_updates: 5
     optionsmap:
@@ -3592,15 +3600,68 @@ select:
     id: bms2_balancing_toggle
     name: "${pack2_name} balancing"
     icon: mdi:scale-balance
-    address: 4216
+    address: 4216  # 0x1078
     value_type: U_DWORD
     skip_updates: 5
     optionsmap:
       "Off": 0
       "On": 1
 
+# works!
+# number:
+#   - platform: modbus_controller
+#     modbus_controller_id: bms2
+#     # name: "${name} LCD Dry node 1 buzzer trigger source"   #
+#     id: bms2_lcd_buzzer_trigger_source_DRY1Trigger
+#     address: 0x14E4
+#     register_type: holding
+#     value_type: U_WORD
+#     use_write_multiple: true
+
+#   - platform: template
+#     name: "${name} LCD buzzer trigger source"   # RCVTime
+#     min_value: 0
+#     max_value: 12
+#     # multiply: 10
+#     step: 1
+#     mode: box
+#     update_interval: 60s
+#     lambda: |-
+#       return (id(bms2_lcd_buzzer_trigger_source).state);
+#     set_action:
+#       - number.set:
+#           id: bms2_lcd_buzzer_trigger_source_DRY1Trigger
+#           value: !lambda |-
+#             uint16_t a = id(bms2_lcd_buzzer_trigger_source).state;
+#             return ((a * 0x0100) + x);
+
+#   - platform: template
+#     name: "${name} Dry node 1 trigger source"   # RCVTime
+#     min_value: 0
+#     max_value: 12
+#     # multiply: 10
+#     step: 1
+#     mode: box
+#     update_interval: 5s
+#     lambda: |-
+#       return (id(bms2_lcd_buzzer_trigger_source).state);
+#     set_action:
+#       - number.set:
+#           id: bms2_lcd_buzzer_trigger_source_DRY1Trigger
+#           value: !lambda |-
+#             uint16_t a = id(bms2_lcd_buzzer_trigger_source_DRY1Trigger).state;
+#             return ((a * 0x0100) + x);
+
 text_sensor:
-  # Pack 1
+  - platform: modbus_controller
+    modbus_controller_id: bms1
+    name: "${pack1_name} Password"
+    register_type: holding
+    address: 0x1470 # 0x1400 base + 0x0070 offset
+    register_count: 8
+    response_size: 16
+    raw_encode: ANSI
+
   - platform: template
     name: "${pack1_name} total runtime formatted"
     update_interval: 60s
@@ -3663,9 +3724,18 @@ text_sensor:
       }
       return values;
   # Pack 2
+  - platform: modbus_controller
+    modbus_controller_id: bms2
+    name: "${pack2_name} Password"
+    register_type: holding
+    address: 0x1470 # 0x1400 base + 0x0070 offset
+    register_count: 8
+    response_size: 16
+    raw_encode: ANSI
+
   - platform: template
     name: "${pack2_name} total runtime formatted"
-    update_interval: 60s
+    # update_interval: 60s
     lambda: |-
       std::string value = "Unknown";
       if (id(bms2_total_runtime) && !isnan(id(bms2_total_runtime).state)) {
